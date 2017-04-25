@@ -4,15 +4,23 @@ const TOPIC_POSITION = 'position';
 var client;
 var callbacks = {'WEST':null,'EAST':null,'NORTH':null,'SOUTH':null}
 
-function doConnection(ip,port){
+function doConnection(ip, port){
 	client = mqtt.connect('mqtt://' + ip + ':' + port);
+
+	client.on('connect', function () {
+	  client.subscribe(TOPIC_DIRECTION);
+		client.subscribe(TOPIC_POSITION);
+	});
+
 	client.on('message', function(topic, payload){
-		if(topic === TOPIC_DIRECTION){
-			callbacks[payload](); // calls callback function
-		} else if (topic === TOPIC_POSITION){
-			console.log(JSON.parse(payload.toString()));
+		topicStr = topic.toString();
+		payloadStr = payload.toString();
+		if(topicStr === TOPIC_DIRECTION){
+			callbacks[payloadStr](); // calls callback function
+		} else if (topicStr === TOPIC_POSITION) {
+			console.log(JSON.parse(payloadStr));
 		}
-	})
+	});
 }
 
 function onLeft(callback){
