@@ -60,3 +60,11 @@ body {
 .right {
   right: 0;
 }
+
+.feedback-movement {
+  background-color: black;
+  border: 1px solid white;
+  opacity: 0.4;
+  position: absolute;
+  top: 10px ;
+}
