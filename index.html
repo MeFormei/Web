@@ -37,13 +37,13 @@
     </div>
 
     <div class="feedback-movement">
-      <canvas id="feedback"></canvas>
+      <canvas id="feedback" width="352" height="240"></canvas>
     </div>
 
     <script src="script/mqtt.min.js"></script>
     <script src="script/meformei.js"></script>
     <script>
-      doConnection('localhost', 1883);
+      doConnection('localhost', 9001);
 
       onLeft(function() {
         console.log("Movendo para esquerda");
