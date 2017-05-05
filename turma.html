@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Me Formei</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="style/layout.css">
+    <script src="script/jquery-3.2.1.min.js"></script>
+  </head>
+
+  <body>
+    <h2 class="w3-center"></h2>
+
+    <div class="w3-content w3-display-container">
+      <img class="mySlides" src="assets/t01.jpg" style="width:100%">
+      <img class="mySlides" src="assets/t02.jpg" style="width:100%">
+      <img class="mySlides" src="assets/t03.jpg" style="width:100%">
+      <img class="mySlides" src="assets/t04.jpg" style="width:100%">
+      <img class="mySlides" src="assets/t05.jpg" style="width:100%">
+
+      <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+      <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+    </div>
+
+    <div class="feedback-movement">
+      <canvas id="feedback"></canvas>
+    </div>
+
+    <script src="script/mqtt.min.js"></script>
+    <script src="script/meformei.js"></script>
+    <script>
+      doConnection('localhost', 1883);
+
+      onLeft(function() {
+        console.log("Movendo para esquerda");
+        plusDivs(-1);
+      });
+
+      onRight(function() {
+        console.log("Movendo para direita");
+        plusDivs(1);
+      });
+
+      onTop(function() {
+        console.log("Movendo para o topo");
+      });
+
+      onDown(function() {
+        console.log("Movendo para baixo");
+      })
+    </script>
+
+    <script>
+      var slideIndex = 1;
+      showDivs(slideIndex);
+
+      function plusDivs(n) {
+        showDivs(slideIndex += n);
+      }
+
+      function currentDiv(n) {
+        showDivs(slideIndex = n);
+      }
+
+      function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        if (n > x.length) {
+          slideIndex = 1
+        }
+        if (n < 1) {
+          slideIndex = x.length
+        }
+        for (i = 0; i < x.length; i++) {
+          x[i].style.display = "none";
+        }
+        x[slideIndex - 1].style.display = "block";
+      }
+
+      var slideIndex = 0;
+      carousel();
+
+      function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        for (i = 0; i < x.length; i++) {
+          x[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > x.length) {
+          slideIndex = 1
+        }
+        x[slideIndex - 1].style.display = "block";
+        // setTimeout(carousel, 8000); // Change image every 2 seconds
+      }
+
+      $("#right").click(function() {
+        var currentLeft = parseInt($('.items').css('left'));
+        $('.items').css('left', (currentLeft - 800) + 'px');
+      })
+
+      $('#left').click(function() {
+        var currentLeft = parseInt($('.items').css('left'));
+        $('.items').css('left', (currentLeft + 800) + 'px');
+      })
+    </script>
+  </body>
+</html>
