@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<<<<<<< HEAD
   <head>
     <title>Me Formei</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -133,4 +134,171 @@
       })
     </script>
   </body>
+=======
+    <head>
+        <title>Me Formei</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="style/layout.css">
+        <link rel="stylesheet" href="style/style.css">
+        <script src="script/jquery-3.2.1.min.js"></script>
+    </head>
+
+    <body>
+        <div>
+            <ul class="slides">
+                <input type="radio" name="radio-btn" id="img-1" checked/>
+                <li class="slide-container">
+                    <div class="slide">
+                        <img class="mySlides" src="assets/t01.jpg" style="width:100%">
+                        <img class="mySlides" src="assets/t02.jpg" style="width:100%">
+                        <img class="mySlides" src="assets/t03.jpg" style="width:100%">
+                        <img class="mySlides" src="assets/t04.jpg" style="width:100%">
+                        <img class="mySlides" src="assets/t05.jpg" style="width:100%">
+                    </div>
+                    <div class="nav">
+                        <label class="prev" onclick="plusDivs(-1)">&#x2039;</label>
+                        <label class="next" onclick="plusDivs(1)">&#x203a;</label>
+                    </div>
+                </li>
+
+            </ul>
+            <div class="flex-container">
+                <div class="items">
+                    <img class="image" src="assets/t01.jpg" onClick="currentDiv(1)"/>
+                    <img class="image" src="assets/t02.jpg" onClick="currentDiv(2)"/>
+                    <img class="image" src="assets/t03.jpg" onClick="currentDiv(3)"/>
+                    <img class="image" src="assets/t04.jpg" onClick="currentDiv(4)">
+                    <img class="image" src="assets/t05.jpg" onClick="currentDiv(5)">
+                </div>
+                <div id="left" class="button-overlay left">&#9664;</div>
+                <div id="right" class="button-overlay right">&#9654;</div>
+            </div>
+            <div class="feedback-movement">
+                <canvas id="feedback" width="352" height="240"></canvas>
+            </div>
+        </div>
+
+        <script src="script/mqtt.min.js"></script>
+        <script src="script/meformei.js"></script>
+        <script>
+            var canvas = document.getElementById('feedback');
+            var context = canvas.getContext("2d");
+
+            function renderPosition(coordX, coordY) {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                drawCircle(coordX.toPrecision(2), coordY.toPrecision(2));
+            }
+
+            function drawCircle(relativeX, relativeY) {
+                context.beginPath();
+                context.arc(relativeX, relativeY, 20, 0, 2 * Math.PI, true);
+                context.fillStyle = "green";
+                context.fill();
+                context.strokeStyle = '#003300';
+                context.stroke();
+
+                requestAnimationFrame(drawCircle);
+            }
+
+            function toggleFeedbackPanel(flag) {
+                var $feedbackMovement = $(".feedback-movement");
+                if (flag) {
+                    $feedbackMovement.fadeIn(300);
+                } else {
+                    $feedbackMovement.fadeOut(300);
+                }
+            }
+        </script>
+        <script>
+            doConnection('localhost', 9001);
+
+            onLeft(function () {
+                console.log("Movendo para esquerda");
+                plusDivs(-1);
+            });
+
+            onRight(function () {
+                console.log("Movendo para direita");
+                plusDivs(1);
+            });
+
+            onTop(function () {
+                console.log("Movendo para o topo");
+            });
+
+            onDown(function () {
+                console.log("Movendo para baixo");
+            });
+
+            onPosition(function (position) {
+                if (position === null) {
+                    toggleFeedbackPanel(false);
+                    return;
+                }
+
+                toggleFeedbackPanel(true);
+                renderPosition(position.x, position.y);
+                console.log(position.x + ", " + position.y);
+            });
+        </script>
+
+        <script>
+            var slideIndex = 1;
+            showDivs(slideIndex);
+
+            function plusDivs(n) {
+                showDivs(slideIndex += n);
+            }
+
+            function currentDiv(n) {
+                showDivs(slideIndex = n);
+            }
+
+            function showDivs(n) {
+                var i;
+                var x = document.getElementsByClassName("mySlides");
+                if (n > x.length) {
+                    slideIndex = 1
+                }
+                if (n < 1) {
+                    slideIndex = x.length
+                }
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                }
+                x[slideIndex - 1].style.display = "block";
+            }
+
+            var slideIndex = 0;
+            carousel();
+
+            function carousel() {
+                var i;
+                var x = document.getElementsByClassName("mySlides");
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                }
+                slideIndex++;
+                if (slideIndex > x.length) {
+                    slideIndex = 1
+                }
+                x[slideIndex - 1].style.display = "block";
+                // setTimeout(carousel, 8000); // Change image every 2 seconds
+            }
+
+            $("#right").click(function () {
+                var $items = $('.items');
+                var currentLeft = parseInt($items.css('left'));
+                $items.css('left', (currentLeft - 800) + 'px');
+            });
+
+            $('#left').click(function () {
+                var $items = $('.items');
+                var currentLeft = parseInt($items.css('left'));
+                $items.css('left', (currentLeft + 800) + 'px');
+            });
+        </script>
+    </body>
+>>>>>>> b8d9d205ab0a838f52c089c2db521e8a621b3b47
 </html>

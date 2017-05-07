@@ -1,15 +1,8 @@
 const TOPIC_DIRECTION = 'direction';
 const TOPIC_POSITION = 'position';
-const TOPIC_STATUS = 'status';
 
 var client;
-var callbacks = {'WEST':null,'EAST':null,'NORTH':null,'SOUTH':null}
-var canvas = document.getElementById('feedback');
-var context = canvas.getContext("2d");
-
-const WIDTH_FACTOR = 0.3333; 
-const HEIGHT_FACTOR = 0.3333;
-
+var callbacks = { 'direction':{'WEST':null,'EAST':null,'NORTH':null,'SOUTH':null}, 'position':null };
 
 function doConnection(ip, port){
 	client = mqtt.connect('mqtt://' + ip + ':' + port);
@@ -21,73 +14,42 @@ function doConnection(ip, port){
 	});
 
 	client.on('message', function(topic, payload){
-		topicStr = topic.toString();
-		payloadStr = payload.toString();
+		var topicStr = topic.toString();
+		var payloadStr = payload.toString();
 		
 		if(topicStr === TOPIC_DIRECTION){
-			
-			callbacks[payloadStr](); // calls callback function
 
-		} 
-		else if (topicStr === TOPIC_POSITION) {
-			
-			if(payloadStr == 'none'){
-				toggleFeedbackPanel(false);
-				return;
-			}
+			callbacks[TOPIC_DIRECTION][payloadStr](); // calls callback function
 
-			toggleFeedbackPanel(true);
-			coord = JSON.parse(payloadStr);
-			onCoordinates(coord.x, coord.y);
-			console.log(coord.x +" - "+ coord.y);
+		} else if (topicStr === TOPIC_POSITION) {
+
+		    if(payloadStr === 'none'){
+				callbacks[TOPIC_POSITION](null); // calls callback function with no position
+			} else {
+		        var position = JSON.parse(payloadStr);
+		        callbacks[TOPIC_POSITION](position); // calls callback function with the received position
+            }
 
 		}
 	});
 }
 
-
-function onCoordinates(coordX, coordY) {
-	var relativeX = coordX * WIDTH_FACTOR;
-	var relativeY = coordY * HEIGHT_FACTOR;
-
-	context.clearRect(0, 0, canvas.width, canvas.height);
- 	drawCircle(relativeX.toPrecision(2), relativeY.toPrecision(2));
-}
-
-
-function drawCircle(relativeX, relativeY) {
-
-	context.beginPath();
-	context.arc(relativeX, relativeY, 20, 0, 2 * Math.PI, true);
-	context.fillStyle =  "green";
-	context.fill();
-	context.strokeStyle = '#003300';
-	context.stroke();
-
-	requestAnimationFrame(drawCircle);
-}
-
-function toggleFeedbackPanel(flag) {
-	if (flag == false)
-		$(".feedback-movement").fadeOut(300);
-		
-	if (flag == true)
-		$(".feedback-movement").fadeIn(300);
-}
-
-
 function onLeft(callback){
-	callbacks['WEST'] = callback;
+	callbacks[TOPIC_DIRECTION]['WEST'] = callback;
 }
 
 function onRight(callback){
-	callbacks['EAST'] = callback;
+	callbacks[TOPIC_DIRECTION]['EAST'] = callback;
 }
 
 function onTop(callback){
-	callbacks['NORTH'] = callback;
+	callbacks[TOPIC_DIRECTION]['NORTH'] = callback;
 }
 
 function onDown(callback){
-	callbacks['SOUTH'] = callback;
+	callbacks[TOPIC_DIRECTION]['SOUTH'] = callback;
+}
+
+function onPosition(callback) {
+    callbacks[TOPIC_POSITION] = callback;
 }
