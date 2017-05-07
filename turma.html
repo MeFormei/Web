@@ -3,29 +3,34 @@
   <head>
     <title>Me Formei</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="style/layout.css">
+	<link rel="stylesheet" href="style/style.css">
     <script src="script/jquery-3.2.1.min.js"></script>
+	<link rel="shortcut icon" type="image/png" href="images/cap.png"/>
   </head>
 
   <body>
-    <h2 class="w3-center"></h2>
-
-    <div class="w3-content w3-display-container">
-      <img class="mySlides" src="assets/t01.jpg" style="width:100%">
-      <img class="mySlides" src="assets/t02.jpg" style="width:100%">
-      <img class="mySlides" src="assets/t03.jpg" style="width:100%">
-      <img class="mySlides" src="assets/t04.jpg" style="width:100%">
-      <img class="mySlides" src="assets/t05.jpg" style="width:100%">
-
-      <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-      <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
-    </div>
-
+  <div>
+   <ul class="slides">
+		<input type="radio" name="radio-btn" id="img-1" checked />
+		<li class="slide-container">
+		<div class="slide">
+		  <img class="mySlides" src="assets/t01.jpg" style="width:100%">
+		</div>
+		<div class="navVertical">
+			<a href="alunos.html">
+				<label  class="up">&#x5e;</label>
+			</a>
+			<a href="index.html">
+				<label  class="down">&#711;</label>
+			</a>
+		</div>
+		</li>
+   </ul>
     <div class="feedback-movement">
       <canvas id="feedback"></canvas>
     </div>
-
+	</div>
     <script src="script/mqtt.min.js"></script>
     <script src="script/meformei.js"></script>
     <script>
