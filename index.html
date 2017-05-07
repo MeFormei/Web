@@ -5,41 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="style/layout.css">
+	<link rel="stylesheet" href="style/style.css">
     <script src="script/jquery-3.2.1.min.js"></script>
   </head>
 
   <body>
-    <h2 class="w3-center"></h2>
-
-    <div class="w3-content w3-display-container">
-      <img class="mySlides" src="assets/t01.jpg" style="width:100%">
-      <img class="mySlides" src="assets/t02.jpg" style="width:100%">
-      <img class="mySlides" src="assets/t03.jpg" style="width:100%">
-      <img class="mySlides" src="assets/t04.jpg" style="width:100%">
-      <img class="mySlides" src="assets/t05.jpg" style="width:100%">
-
-      <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-      <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
-    </div>
-
     <div>
-      <div class="flex-container">
-        <div class="items">
-          <img class="image" src="assets/t01.jpg" onClick="currentDiv(1)" />
-          <img class="image" src="assets/t02.jpg" onClick="currentDiv(2)" />
-          <img class="image" src="assets/t03.jpg" onClick="currentDiv(3)" />
-          <img class="image" src="assets/t04.jpg" onClick="currentDiv(4)">
-          <img class="image" src="assets/t05.jpg" onClick="currentDiv(5)">
-        </div>
-        <div id="left" class="button-overlay left">&#9664;</div>
-        <div id="right" class="button-overlay right">&#9654;</div>
-      </div>
-    </div>
 
-    <div class="feedback-movement">
-      <canvas id="feedback" width="352" height="240"></canvas>
-    </div>
+	<ul class="slides">
+		<input type="radio" name="radio-btn" id="img-1" checked />
+		<li class="slide-container">
+			<div class="slide">
+			  <img class="mySlides" src="assets/t01.jpg" style="width:100%">
+			  <img class="mySlides" src="assets/t02.jpg" style="width:100%">
+			  <img class="mySlides" src="assets/t03.jpg" style="width:100%">
+			  <img class="mySlides" src="assets/t04.jpg" style="width:100%">
+			  <img class="mySlides" src="assets/t05.jpg" style="width:100%">
+			</div>
+			<div class="nav">
+				<label for="img-6" class="prev" onclick="plusDivs(-1)">&#x2039;</label>
+				<label for="img-2" class="next" onclick="plusDivs(1)">&#x203a;</label>
+			</div>
+		</li>
+		 
+	</ul>
+	<div class="flex-container">
+			<div class="items">
+			  <img class="image" src="assets/t01.jpg" onClick="currentDiv(1)" />
+			  <img class="image" src="assets/t02.jpg" onClick="currentDiv(2)" />
+			  <img class="image" src="assets/t03.jpg" onClick="currentDiv(3)" />
+			  <img class="image" src="assets/t04.jpg" onClick="currentDiv(4)">
+			  <img class="image" src="assets/t05.jpg" onClick="currentDiv(5)">
+			</div>
+			<div id="left" class="button-overlay left">&#9664;</div>
+			<div id="right" class="button-overlay right">&#9654;</div>
+		  </div>
+		  <div class="feedback-movement">
+		    <canvas id="feedback" width="352" height="240"></canvas>
+		  </div>
+    
+     
+    
 
+  
+	</div>
     <script src="script/mqtt.min.js"></script>
     <script src="script/meformei.js"></script>
     <script>
