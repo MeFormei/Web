@@ -10,13 +10,20 @@
   <script src="script/jquery.easings.min.js"></script>
   <script type="text/javascript" src="script/scrolloverflow.min.js"></script>
   <script src="script/jquery.fullPage.js"></script>
+
+
+  <link rel="stylesheet" type="text/css" href="style/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="style/slick-theme.css"/>  
+  <script type="text/javascript" src="script/slick.min.js"></script>
+
+
   <link rel="shortcut icon" type="image/png" href="images/cap.png"/>
 
   <script type="text/javascript">
     $(document).ready(function() {
-        $('#fullpage').fullpage({
-            sectionsColor: ['#333', '#333', '#333'],
-        });
+      $('#fullpage').fullpage({
+        sectionsColor: ['#333', '#F1F1F1', '#333'],
+      });
     });
   </script>
 
@@ -24,37 +31,76 @@
 
 <body>
   <div id="fullpage">
-      <div class="section">
-        <center>
-            <img class="mySlides" src="assets/t01.jpg" style="width:30%">
-            <img class="mySlides" src="assets/t02.jpg" style="width:30%">
-            <img class="mySlides" src="assets/t03.jpg" style="width:30%">
-            <img class="mySlides" src="assets/t04.jpg" style="width:30%">
-            <img class="mySlides" src="assets/t05.jpg" style="width:30%">
-        </center>
+    <div class="section principal" style="background: url('assets/t01.jpg') no-repeat;background-size: 100%;">
+
+      <div style="position:absolute; bottom:0;" class="control">
+        <img src="assets/t01.jpg" style="height:100px;">
+        <img src="assets/t02.jpg" style="height:100px;">
+        <img src="assets/t03.jpg" style="height:100px;">
+        <img src="assets/t04.jpg" style="height:100px;">
+        <img src="assets/t05.jpg" style="height:100px;">
+        <img src="assets/t01.jpg" style="height:100px;">
+        <img src="assets/t02.jpg" style="height:100px;">
+        <img src="assets/t03.jpg" style="height:100px;">
+        <img src="assets/t04.jpg" style="height:100px;">
+        <img src="assets/t05.jpg" style="height:100px;">
+        <img src="assets/t01.jpg" style="height:100px;">
+        <img src="assets/t02.jpg" style="height:100px;">
+        <img src="assets/t03.jpg" style="height:100px;">
+        <img src="assets/t04.jpg" style="height:100px;">
+        <img src="assets/t05.jpg" style="height:100px;">
+        <img src="assets/t01.jpg" style="height:100px;">
+        <img src="assets/t02.jpg" style="height:100px;">
+        <img src="assets/t03.jpg" style="height:100px;">
+        <img src="assets/t04.jpg" style="height:100px;">
+        <img src="assets/t05.jpg" style="height:100px;">
+
       </div>
 
-      <div id="alunos" class="section">
+      <script>
+        $('.control').slick({
+         variableWidth: true,
+         infinite: true,
+         autoPlay:true,
+         slidesToShow: 1,
+       });
 
-      </div>
+      </script>
 
-      <div id="homenageados" class="section">
 
-      </div>  
+
+
+    </div>
+    
+    <div class="section">
+      <h1> Detalhes turma </h1>
+    </div>
+
+    <div class="section">
+      <h1> Detalhes homenageados </h1>
+    </div>
+
+
+    <script>
+
+  </script>
 
   <script src="script/mqtt.min.js"></script>
   <script src="script/meformei.js"></script>
   <script>
+
+    var $control = $('.control');
+
     doConnection('localhost', 9001);
 
     onLeft(function() {
       console.log("Movendo para esquerda");
-      plusDivs(-1);
+      $control.slick('slickNext');
     });
 
     onRight(function() {
       console.log("Movendo para direita");
-      plusDivs(1);
+      $control.slick('slickPrev');
     });
 
     onTop(function() {
@@ -65,6 +111,5 @@
       console.log("Movendo para baixo");
     })
   </script>
-
 </body>
 </html>
