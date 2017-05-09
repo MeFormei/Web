@@ -50,19 +50,39 @@
     onLeft(function() {
       console.log("Movendo para esquerda");
       plusDivs(-1);
+      document.write("
+        <audio controls>
+            <source src="sounds/cursor-move.mp3" type="audio/mpeg">
+               Your browser does not support the audio element.
+        </audio> " );
     });
 
     onRight(function() {
       console.log("Movendo para direita");
       plusDivs(1);
+      document.write("
+        <audio controls>
+            <source src="sounds/cursor-move.mp3" type="audio/mpeg">
+               Your browser does not support the audio element.
+        </audio> " );
     });
 
     onTop(function() {
       console.log("Movendo para o topo");
+      document.write("
+        <audio controls>
+            <source src="sounds/cursor-move.mp3" type="audio/mpeg">
+               Your browser does not support the audio element.
+        </audio> " );
     });
 
     onDown(function() {
       console.log("Movendo para baixo");
+      document.write("
+        <audio controls>
+            <source src="sounds/cursor-move.mp3" type="audio/mpeg">
+               Your browser does not support the audio element.
+        </audio> " );
     })
   </script>
 
