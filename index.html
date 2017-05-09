@@ -17,16 +17,10 @@
   <script type="text/javascript">
     $(document).ready(function() {
       $('#fullpage').fullpage({
-        sectionsColor: ['#333', '#F1F1F1', '#333'],
+        sectionsColor: ['#333', '#F1F1F1', '#F7F7F7'],
       });
     });
   </script>
-
-  <style>
-      html {
-         overflow-x: hidden; 
-      }
-  </style>
 
   <script>
 
@@ -123,7 +117,7 @@
     </div>
 
   <script id="section-principal-template" type="text/x-handlebars-template">
-    <div style="position:absolute; bottom:0;" class="control owl-carousel owl-theme">
+    <div style="position:absolute; bottom:0;opacity:0.9;height:160px;padding-top:10px;background:#333;" class="control owl-carousel owl-theme">
       {{#each turmas}}
         <img src="{{foto}}" class="item" style="height:150px;"/>
       {{/each}}
