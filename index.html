@@ -49,21 +49,38 @@
         <script>
             var canvas = document.getElementById('feedback');
             var context = canvas.getContext("2d");
+            var relativeX = 0;
+            var relativeY = 0;
+            var xPos = 0;
+            var yPos = 0;
 
-            function renderPosition(coordX, coordY) {
-                context.clearRect(0, 0, canvas.width, canvas.height);
-                drawCircle(coordX.toPrecision(2), coordY.toPrecision(2));
+            // function renderPosition(coordX, coordY) {
+            //     context.clearRect(0, 0, canvas.width, canvas.height);
+            //     drawCircle(coordX.toPrecision(2), coordY.toPrecision(2));
+            // }
+
+            function setCoordinates(coordX, coordY) {
+                relativeX = coordX;
+                relativeY = coordY;
             }
 
-            function drawCircle(relativeX, relativeY) {
+            function animate() {
+                dx = relativeX - xPos;
+                dy = relativeY - yPos;
+
+                xPos += (dx / 90);
+                yPos += (dy / 90);
+
+                context.clearRect(0, 0, canvas.width, canvas.height);
+
                 context.beginPath();
-                context.arc(relativeX, relativeY, 20, 0, 2 * Math.PI, true);
+                context.arc(xPos, yPos, 20, 0, 2 * Math.PI, true);
                 context.fillStyle = "green";
                 context.fill();
                 context.strokeStyle = '#003300';
                 context.stroke();
 
-                requestAnimationFrame(drawCircle);
+                requestAnimationFrame(animate);
             }
 
             function toggleFeedbackPanel(flag) {
@@ -103,7 +120,8 @@
                 }
 
                 toggleFeedbackPanel(true);
-                renderPosition(position.x, position.y);
+                setCoordinates(position.x, position.y);
+                animate();
                 console.log(position.x + ", " + position.y);
             });
         </script>
