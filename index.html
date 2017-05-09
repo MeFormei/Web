@@ -1,188 +1,154 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Me Formei</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <link rel="stylesheet" href="style/layout.css">
-        <link rel="stylesheet" href="style/style.css">
-        <script src="script/jquery-3.2.1.min.js"></script>
-    </head>
+<head>
+  <title>Me Formei</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style/layout.css">
+  <link rel="stylesheet" href="style/style.css">
+  <link rel="stylesheet" href="style/jquery.fullPage.css">
+  <link rel="stylesheet" type="text/css" href="style/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="style/slick-theme.css"/>  
+  <link rel="shortcut icon" type="image/png" href="images/cap.png"/>
+  <script src="script/jquery-3.2.1.min.js"></script>
+  <script src="script/jquery.easings.min.js"></script>
+  <script type="text/javascript" src="script/scrolloverflow.min.js"></script>
+  <script src="script/jquery.fullPage.js"></script>
+  <script type="text/javascript" src="script/slick.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#fullpage').fullpage({
+        sectionsColor: ['#333', '#F1F1F1', '#333'],
+      });
+    });
+  </script>
 
-    <body>
-        <div>
-            <ul class="slides">
-                <input type="radio" name="radio-btn" id="img-1" checked/>
-                <li class="slide-container">
-                    <div class="slide">
-                        <img class="mySlides" src="assets/t01.jpg" style="width:100%">
-                        <img class="mySlides" src="assets/t02.jpg" style="width:100%">
-                        <img class="mySlides" src="assets/t03.jpg" style="width:100%">
-                        <img class="mySlides" src="assets/t04.jpg" style="width:100%">
-                        <img class="mySlides" src="assets/t05.jpg" style="width:100%">
-                    </div>
-                    <div class="nav">
-                        <label class="prev" onclick="plusDivs(-1)">&#x2039;</label>
-                        <label class="next" onclick="plusDivs(1)">&#x203a;</label>
-                    </div>
-                </li>
+</head>
 
-            </ul>
-            <div class="flex-container">
-                <div class="items">
-                    <img class="image" src="assets/t01.jpg" onClick="currentDiv(1)"/>
-                    <img class="image" src="assets/t02.jpg" onClick="currentDiv(2)"/>
-                    <img class="image" src="assets/t03.jpg" onClick="currentDiv(3)"/>
-                    <img class="image" src="assets/t04.jpg" onClick="currentDiv(4)">
-                    <img class="image" src="assets/t05.jpg" onClick="currentDiv(5)">
-                </div>
-                <div id="left" class="button-overlay left">&#9664;</div>
-                <div id="right" class="button-overlay right">&#9654;</div>
-            </div>
-            <div class="feedback-movement">
-                <canvas id="feedback" width="352" height="240"></canvas>
-            </div>
-        </div>
+<body>
+  <div id="fullpage">
+    <div class="section principal" style="background: url('assets/t01.jpg') no-repeat;background-size: 100%;">
+      <div style="position:absolute; bottom:0;" class="control">
+        <img src="assets/t01.jpg" style="height:150px;">
+        <img src="assets/t02.jpg" style="height:150px;">
+        <img src="assets/t03.jpg" style="height:150px;">
+        <img src="assets/t04.jpg" style="height:150px;">
+        <img src="assets/t05.jpg" style="height:150px;">
+        <img src="assets/t01.jpg" style="height:150px;">
+        <img src="assets/t02.jpg" style="height:150px;">
+        <img src="assets/t03.jpg" style="height:150px;">
+        <img src="assets/t04.jpg" style="height:150px;">
+        <img src="assets/t05.jpg" style="height:150px;">
+        <img src="assets/t01.jpg" style="height:150px;">
+        <img src="assets/t02.jpg" style="height:150px;">
+        <img src="assets/t03.jpg" style="height:150px;">
+        <img src="assets/t04.jpg" style="height:150px;">
+        <img src="assets/t05.jpg" style="height:150px;">
+      </div>
+    </div>
+    
+    <div class="section">
+      <h1> Detalhes turma </h1>
+    </div>
 
-        <script src="script/mqtt.min.js"></script>
-        <script src="script/meformei.js"></script>
-        <script>
-            var canvas = document.getElementById('feedback');
-            var context = canvas.getContext("2d");
-            
-            var iterations = 70;
-            var movementX = 0;
-            var movementY = 0;
-            var positionCursorX = 0;
-            var positionCursorY = 0;
+    <div class="section">
+      <h1> Detalhes homenageados </h1>
+    </div>
 
+  <script src="script/mqtt.min.js"></script>
+  <script src="script/meformei.js"></script>
+  <script id="desenho">
+    var canvas = document.getElementById('feedback');
+    var context = canvas.getContext("2d");
+    
+    var iterations = 70;
+    var movementX = 0;
+    var movementY = 0;
+    var positionCursorX = 0;
+    var positionCursorY = 0;
 
-            function setCoordinates(coordX, coordY) {
-                movementX = coordX;
-                movementY = coordY;
-            }
+    function setCoordinates(coordX, coordY) {
+        movementX = coordX;
+        movementY = coordY;
+    }
 
-            function animate() {
-                dx = movementX - positionCursorX;
-                dy = movementY - positionCursorY;
+    function animate() {
+        dx = movementX - positionCursorX;
+        dy = movementY - positionCursorY;
 
-                positionCursorX += (dx / iterations);
-                positionCursorY += (dy / iterations);
+        positionCursorX += (dx / iterations);
+        positionCursorY += (dy / iterations);
 
-                context.clearRect(0, 0, canvas.width, canvas.height);
+        context.clearRect(0, 0, canvas.width, canvas.height);
 
-                drawCircle(positionCursorX, positionCursorY);
+        drawCircle(positionCursorX, positionCursorY);
 
-                requestAnimationFrame(animate);
-            }
+        requestAnimationFrame(animate);
+    }
 
-            function drawCircle(coordX, coordY) {
-                context.beginPath();
-                context.arc(coordX, coordY, 20, 0, 2 * Math.PI, true);
-                context.fillStyle = "green";
-                context.fill();
-                context.strokeStyle = '#003300';
-                context.stroke();
-            }
+    function drawCircle(coordX, coordY) {
+        context.beginPath();
+        context.arc(coordX, coordY, 20, 0, 2 * Math.PI, true);
+        context.fillStyle = "green";
+        context.fill();
+        context.strokeStyle = '#003300';
+        context.stroke();
+    }
 
-            function toggleFeedbackPanel(flag) {
-                var $feedbackMovement = $(".feedback-movement");
-                if (flag) {
-                    $feedbackMovement.fadeIn(300);
-                } else {
-                    $feedbackMovement.fadeOut(300);
-                }
-            }
-        </script>
-        <script>
-            doConnection('localhost', 9001);
+    function toggleFeedbackPanel(flag) {
+        var $feedbackMovement = $(".feedback-movement");
+        if (flag) {
+            $feedbackMovement.fadeIn(300);
+        } else {
+            $feedbackMovement.fadeOut(300);
+        }
+    }
+  </script>
 
-            onLeft(function () {
-                console.log("Movendo para esquerda");
-                plusDivs(-1);
-            });
+  <script id="gestos">
 
-            onRight(function () {
-                console.log("Movendo para direita");
-                plusDivs(1);
-            });
+    $('.control').slick({
+         variableWidth: true,
+         infinite: true,
+         autoPlay:true,
+         slidesToShow: 1,
+     });
 
-            onTop(function () {
-                console.log("Movendo para o topo");
-            });
+    doConnection('localhost', 9001);
 
-            onDown(function () {
-                console.log("Movendo para baixo");
-            });
+    var $control = $('.control');
 
-            onPosition(function (position) {
-                if (position === null) {
-                    toggleFeedbackPanel(false);
-                    return;
-                }
+    onLeft(function () {
+        $control.slick('slickNext');
+        document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
+    });
 
-                toggleFeedbackPanel(true);
-                setCoordinates(position.x, position.y);
-                animate();
-                console.log(position.x + ", " + position.y);
-            });
-        </script>
+    onRight(function () {
+        $control.slick('slickPrev');
+        document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
+    });
 
-        <script>
-            var slideIndex = 1;
-            showDivs(slideIndex);
+    onTop(function () {
+        console.log("Movendo para o topo");
+        document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
+    });
 
-            function plusDivs(n) {
-                showDivs(slideIndex += n);
-            }
+    onDown(function () {
+        console.log("Movendo para baixo");
+        document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
+    });
 
-            function currentDiv(n) {
-                showDivs(slideIndex = n);
-            }
+    onPosition(function (position) {
+        if (position === null) {
+            toggleFeedbackPanel(false);
+            return;
+        }
 
-            function showDivs(n) {
-                var i;
-                var x = document.getElementsByClassName("mySlides");
-                if (n > x.length) {
-                    slideIndex = 1
-                }
-                if (n < 1) {
-                    slideIndex = x.length
-                }
-                for (i = 0; i < x.length; i++) {
-                    x[i].style.display = "none";
-                }
-                x[slideIndex - 1].style.display = "block";
-            }
+        toggleFeedbackPanel(true);
+        setCoordinates(position.x, position.y);
+        animate();
+    });
 
-            var slideIndex = 0;
-            carousel();
+  </script>
 
-            function carousel() {
-                var i;
-                var x = document.getElementsByClassName("mySlides");
-                for (i = 0; i < x.length; i++) {
-                    x[i].style.display = "none";
-                }
-                slideIndex++;
-                if (slideIndex > x.length) {
-                    slideIndex = 1
-                }
-                x[slideIndex - 1].style.display = "block";
-                setTimeout(carousel, 120); // Change image every 2 minutes
-            }
-
-            $("#right").click(function () {
-                var $items = $('.items');
-                var currentLeft = parseInt($items.css('left'));
-                $items.css('left', (currentLeft - 800) + 'px');
-            });
-
-            $('#left').click(function () {
-                var $items = $('.items');
-                var currentLeft = parseInt($items.css('left'));
-                $items.css('left', (currentLeft + 800) + 'px');
-            });
-        </script>
-    </body>
+</body>
 </html>
