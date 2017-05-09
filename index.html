@@ -32,7 +32,6 @@
 <body>
   <div id="fullpage">
     <div class="section principal" style="background: url('assets/t01.jpg') no-repeat;background-size: 100%;">
-
       <div style="position:absolute; bottom:0;" class="control">
         <img src="assets/t01.jpg" style="height:100px;">
         <img src="assets/t02.jpg" style="height:100px;">
@@ -49,27 +48,7 @@
         <img src="assets/t03.jpg" style="height:100px;">
         <img src="assets/t04.jpg" style="height:100px;">
         <img src="assets/t05.jpg" style="height:100px;">
-        <img src="assets/t01.jpg" style="height:100px;">
-        <img src="assets/t02.jpg" style="height:100px;">
-        <img src="assets/t03.jpg" style="height:100px;">
-        <img src="assets/t04.jpg" style="height:100px;">
-        <img src="assets/t05.jpg" style="height:100px;">
-
       </div>
-
-      <script>
-        $('.control').slick({
-         variableWidth: true,
-         infinite: true,
-         autoPlay:true,
-         slidesToShow: 1,
-       });
-
-      </script>
-
-
-
-
     </div>
     
     <div class="section">
@@ -80,36 +59,95 @@
       <h1> Detalhes homenageados </h1>
     </div>
 
-
-    <script>
-
-  </script>
-
   <script src="script/mqtt.min.js"></script>
   <script src="script/meformei.js"></script>
   <script>
+    var canvas = document.getElementById('feedback');
+    var context = canvas.getContext("2d");
+    
+    var iterations = 70;
+    var movementX = 0;
+    var movementY = 0;
+    var positionCursorX = 0;
+    var positionCursorY = 0;
 
-    var $control = $('.control');
+    function setCoordinates(coordX, coordY) {
+        movementX = coordX;
+        movementY = coordY;
+    }
+
+    function animate() {
+        dx = movementX - positionCursorX;
+        dy = movementY - positionCursorY;
+
+        positionCursorX += (dx / iterations);
+        positionCursorY += (dy / iterations);
+
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        drawCircle(positionCursorX, positionCursorY);
+
+        requestAnimationFrame(animate);
+    }
+
+    function drawCircle(coordX, coordY) {
+        context.beginPath();
+        context.arc(coordX, coordY, 20, 0, 2 * Math.PI, true);
+        context.fillStyle = "green";
+        context.fill();
+        context.strokeStyle = '#003300';
+        context.stroke();
+    }
+
+    function toggleFeedbackPanel(flag) {
+        var $feedbackMovement = $(".feedback-movement");
+        if (flag) {
+            $feedbackMovement.fadeIn(300);
+        } else {
+            $feedbackMovement.fadeOut(300);
+        }
+    }
+  </script>
+  <script>
+    $('.control').slick({
+         variableWidth: true,
+         infinite: true,
+         autoPlay:true,
+         slidesToShow: 1,
+     });
 
     doConnection('localhost', 9001);
 
-    onLeft(function() {
-      console.log("Movendo para esquerda");
-      $control.slick('slickNext');
+    var $control = $('.control');
+
+    onLeft(function () {
+        $control.slick('slickNext');
     });
 
-    onRight(function() {
-      console.log("Movendo para direita");
-      $control.slick('slickPrev');
+    onRight(function () {
+        $control.slick('slickPrev');
     });
 
-    onTop(function() {
-      console.log("Movendo para o topo");
+    onTop(function () {
+        console.log("Movendo para o topo");
     });
 
-    onDown(function() {
-      console.log("Movendo para baixo");
-    })
+    onDown(function () {
+        console.log("Movendo para baixo");
+    });
+
+    onPosition(function (position) {
+        if (position === null) {
+            toggleFeedbackPanel(false);
+            return;
+        }
+
+        toggleFeedbackPanel(true);
+        setCoordinates(position.x, position.y);
+        animate();
+        console.log(position.x + ", " + position.y);
+    });
   </script>
+
 </body>
 </html>
