@@ -49,21 +49,40 @@
         <script>
             var canvas = document.getElementById('feedback');
             var context = canvas.getContext("2d");
+            
+            var iterations = 70;
+            var movementX = 0;
+            var movementY = 0;
+            var positionCursorX = 0;
+            var positionCursorY = 0;
 
-            function renderPosition(coordX, coordY) {
-                context.clearRect(0, 0, canvas.width, canvas.height);
-                drawCircle(coordX.toPrecision(2), coordY.toPrecision(2));
+
+            function setCoordinates(coordX, coordY) {
+                movementX = coordX;
+                movementY = coordY;
             }
 
-            function drawCircle(relativeX, relativeY) {
+            function animate() {
+                dx = movementX - positionCursorX;
+                dy = movementY - positionCursorY;
+
+                positionCursorX += (dx / iterations);
+                positionCursorY += (dy / iterations);
+
+                context.clearRect(0, 0, canvas.width, canvas.height);
+
+                drawCircle(positionCursorX, positionCursorY);
+
+                requestAnimationFrame(animate);
+            }
+
+            function drawCircle(coordX, coordY) {
                 context.beginPath();
-                context.arc(relativeX, relativeY, 20, 0, 2 * Math.PI, true);
+                context.arc(coordX, coordY, 20, 0, 2 * Math.PI, true);
                 context.fillStyle = "green";
                 context.fill();
                 context.strokeStyle = '#003300';
                 context.stroke();
-
-                requestAnimationFrame(drawCircle);
             }
 
             function toggleFeedbackPanel(flag) {
@@ -103,7 +122,8 @@
                 }
 
                 toggleFeedbackPanel(true);
-                renderPosition(position.x, position.y);
+                setCoordinates(position.x, position.y);
+                animate();
                 console.log(position.x + ", " + position.y);
             });
         </script>
