@@ -22,40 +22,132 @@
     });
   </script>
 
+  <style>
+      html {
+         overflow-x: hidden; 
+      }
+  </style>
+
+  <script>
+
+     var turmas = [{
+        id: 0,
+        nome: "Turma NullPointer",
+        patrono: "Maria",
+        paraninfo: "José",
+        curso: "Bacharelado em Tecnologia da Informação",
+        instituicao: "UFRN",
+        reitor: "Angela Paiva Cruz",
+        coordenador: "Girão ",
+        vice_cordenador: "Vice Girão",
+        foto: "assets/t01.jpg"
+     },
+     {
+        id: 0,
+        nome: "Turma NullPointer",
+        patrono: "Maria",
+        paraninfo: "José",
+        curso: "Bacharelado em Tecnologia da Informação",
+        instituicao: "UFRN",
+        reitor: "Angela Paiva Cruz",
+        coordenador: "Girão ",
+        vice_cordenador: "Vice Girão",
+        foto: "assets/t02.jpg"
+     },
+     {
+        id: 0,
+        nome: "Turma NullPointer",
+        patrono: "Maria",
+        paraninfo: "José",
+        curso: "Bacharelado em Tecnologia da Informação",
+        instituicao: "UFRN",
+        reitor: "Angela Paiva Cruz",
+        coordenador: "Girão ",
+        vice_cordenador: "Vice Girão",
+        foto: "assets/t03.jpg"
+     },{
+        id: 0,
+        nome: "Turma NullPointer",
+        patrono: "Maria",
+        paraninfo: "José",
+        curso: "Bacharelado em Tecnologia da Informação",
+        instituicao: "UFRN",
+        reitor: "Angela Paiva Cruz",
+        coordenador: "Girão ",
+        vice_cordenador: "Vice Girão",
+        foto: "assets/t04.jpg"
+     },
+     {
+        id: 0,
+        nome: "Turma NullPointer",
+        patrono: "Maria",
+        paraninfo: "José",
+        curso: "Bacharelado em Tecnologia da Informação",
+        instituicao: "UFRN",
+        reitor: "Angela Paiva Cruz",
+        coordenador: "Girão ",
+        vice_cordenador: "Vice Girão",
+        foto: "assets/t05.jpg"
+     },
+     {
+        id: 0,
+        nome: "Turma NullPointer",
+        patrono: "Maria",
+        paraninfo: "José",
+        curso: "Bacharelado em Tecnologia da Informação",
+        instituicao: "UFRN",
+        reitor: "Angela Paiva Cruz",
+        coordenador: "Girão ",
+        vice_cordenador: "Vice Girão",
+        foto: "assets/t03.jpg"
+     }];
+
+  </script>
+
 </head>
 
 <body>
   <div id="fullpage">
-    <div class="section principal" style="background: url('assets/t01.jpg') no-repeat;background-size: 100%;">
-      <div style="position:absolute; bottom:0;" class="control">
-        <img src="assets/t01.jpg" style="height:150px;">
-        <img src="assets/t02.jpg" style="height:150px;">
-        <img src="assets/t03.jpg" style="height:150px;">
-        <img src="assets/t04.jpg" style="height:150px;">
-        <img src="assets/t05.jpg" style="height:150px;">
-        <img src="assets/t01.jpg" style="height:150px;">
-        <img src="assets/t02.jpg" style="height:150px;">
-        <img src="assets/t03.jpg" style="height:150px;">
-        <img src="assets/t04.jpg" style="height:150px;">
-        <img src="assets/t05.jpg" style="height:150px;">
-        <img src="assets/t01.jpg" style="height:150px;">
-        <img src="assets/t02.jpg" style="height:150px;">
-        <img src="assets/t03.jpg" style="height:150px;">
-        <img src="assets/t04.jpg" style="height:150px;">
-        <img src="assets/t05.jpg" style="height:150px;">
+    <div id="turma" class="section principal" style="background: url('assets/t01.jpg') no-repeat;background-size: 100%;">
+      <div id="navegacao" style="position:absolute; bottom:0;">
+        <!-- gerado pelo section-principal-template -->
       </div>
     </div>
     
-    <div class="section">
+    <div id="turma-detalhes" class="section">
       <h1> Detalhes turma </h1>
     </div>
 
-    <div class="section">
+    <div id="homenageados" class="section">
       <h1> Detalhes homenageados </h1>
     </div>
 
+  <script id="section-principal-template" type="text/x-handlebars-template">
+    <div class="control">
+      {{#each turmas}}
+        <img src="{{foto}}" style="height:150px;margin: 0 auto;"/>
+      {{/each}}
+    </div>
+  </script>
+
   <script src="script/mqtt.min.js"></script>
   <script src="script/meformei.js"></script>
+  <script src="script/handlebars.min-latest.js"></script>
+  <script>
+    var control = $('#turma');
+    var navegacao = $('#navegacao');
+    var source   = $("#section-principal-template").html();
+    var template = Handlebars.compile(source);
+    var html = template({turmas: turmas});
+    navegacao.html(html);
+    $('.control').slick({
+          infinite: true,
+          speed: 300,
+          slidesToScroll: 2,
+          slidesToShow:2,
+          variableWidth: true,
+     });
+  </script>
   <script id="desenho">
     var canvas = document.getElementById('feedback');
     var context = canvas.getContext("2d");
@@ -106,24 +198,19 @@
 
   <script id="gestos">
 
-    $('.control').slick({
-         variableWidth: true,
-         infinite: true,
-         autoPlay:true,
-         slidesToShow: 1,
-     });
-
     doConnection('localhost', 9001);
 
-    var $control = $('.control');
+    control.on('afterChange', function(event, slick, currentSlide, nextSlide){
+
+    });
 
     onLeft(function () {
-        $control.slick('slickNext');
+        control.slick('slickNext');
         document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
     });
 
     onRight(function () {
-        $control.slick('slickPrev');
+        control.slick('slickPrev');
         document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
     });
 
