@@ -6,19 +6,14 @@
   <link rel="stylesheet" href="style/layout.css">
   <link rel="stylesheet" href="style/style.css">
   <link rel="stylesheet" href="style/jquery.fullPage.css">
+  <link rel="stylesheet" type="text/css" href="style/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="style/slick-theme.css"/>  
+  <link rel="shortcut icon" type="image/png" href="images/cap.png"/>
   <script src="script/jquery-3.2.1.min.js"></script>
   <script src="script/jquery.easings.min.js"></script>
   <script type="text/javascript" src="script/scrolloverflow.min.js"></script>
   <script src="script/jquery.fullPage.js"></script>
-
-
-  <link rel="stylesheet" type="text/css" href="style/slick.css"/>
-  <link rel="stylesheet" type="text/css" href="style/slick-theme.css"/>  
   <script type="text/javascript" src="script/slick.min.js"></script>
-
-
-  <link rel="shortcut icon" type="image/png" href="images/cap.png"/>
-
   <script type="text/javascript">
     $(document).ready(function() {
       $('#fullpage').fullpage({
@@ -33,21 +28,21 @@
   <div id="fullpage">
     <div class="section principal" style="background: url('assets/t01.jpg') no-repeat;background-size: 100%;">
       <div style="position:absolute; bottom:0;" class="control">
-        <img src="assets/t01.jpg" style="height:100px;">
-        <img src="assets/t02.jpg" style="height:100px;">
-        <img src="assets/t03.jpg" style="height:100px;">
-        <img src="assets/t04.jpg" style="height:100px;">
-        <img src="assets/t05.jpg" style="height:100px;">
-        <img src="assets/t01.jpg" style="height:100px;">
-        <img src="assets/t02.jpg" style="height:100px;">
-        <img src="assets/t03.jpg" style="height:100px;">
-        <img src="assets/t04.jpg" style="height:100px;">
-        <img src="assets/t05.jpg" style="height:100px;">
-        <img src="assets/t01.jpg" style="height:100px;">
-        <img src="assets/t02.jpg" style="height:100px;">
-        <img src="assets/t03.jpg" style="height:100px;">
-        <img src="assets/t04.jpg" style="height:100px;">
-        <img src="assets/t05.jpg" style="height:100px;">
+        <img src="assets/t01.jpg" style="height:150px;">
+        <img src="assets/t02.jpg" style="height:150px;">
+        <img src="assets/t03.jpg" style="height:150px;">
+        <img src="assets/t04.jpg" style="height:150px;">
+        <img src="assets/t05.jpg" style="height:150px;">
+        <img src="assets/t01.jpg" style="height:150px;">
+        <img src="assets/t02.jpg" style="height:150px;">
+        <img src="assets/t03.jpg" style="height:150px;">
+        <img src="assets/t04.jpg" style="height:150px;">
+        <img src="assets/t05.jpg" style="height:150px;">
+        <img src="assets/t01.jpg" style="height:150px;">
+        <img src="assets/t02.jpg" style="height:150px;">
+        <img src="assets/t03.jpg" style="height:150px;">
+        <img src="assets/t04.jpg" style="height:150px;">
+        <img src="assets/t05.jpg" style="height:150px;">
       </div>
     </div>
     
@@ -61,7 +56,7 @@
 
   <script src="script/mqtt.min.js"></script>
   <script src="script/meformei.js"></script>
-  <script>
+  <script id="desenho">
     var canvas = document.getElementById('feedback');
     var context = canvas.getContext("2d");
     
@@ -108,7 +103,9 @@
         }
     }
   </script>
-  <script>
+
+  <script id="gestos">
+
     $('.control').slick({
          variableWidth: true,
          infinite: true,
@@ -122,18 +119,22 @@
 
     onLeft(function () {
         $control.slick('slickNext');
+        document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
     });
 
     onRight(function () {
         $control.slick('slickPrev');
+        document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
     });
 
     onTop(function () {
         console.log("Movendo para o topo");
+        document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
     });
 
     onDown(function () {
         console.log("Movendo para baixo");
+        document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
     });
 
     onPosition(function (position) {
@@ -145,8 +146,8 @@
         toggleFeedbackPanel(true);
         setCoordinates(position.x, position.y);
         animate();
-        console.log(position.x + ", " + position.y);
     });
+
   </script>
 
 </body>
