@@ -11,7 +11,8 @@ slider.init = function(turmas){
 }
 
 slider.changeCurrentImage = function(index) {
-  var fotoTurmaUrl = slider.turmas[index].foto;
+  var i = index % slider.turmas.length;
+  var fotoTurmaUrl = slider.turmas[i].foto;
   $turma = $('#turma');
   $turma.css("background", "url('" + fotoTurmaUrl + "') no-repeat");
   $turma.css("background-size", "100%");
