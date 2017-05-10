@@ -1,3 +1,11 @@
 .slide-turmas {
 	position:absolute; bottom:0;opacity:0.9;height:160px;padding-top:10px;background:#333;
 }
+
+.cameraview-wrapper {
+  background-color: black;
+  border: 3px solid white;
+  opacity: 0.7;
+  position: absolute;
+  top: 10px ;
+}

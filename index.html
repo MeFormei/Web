@@ -17,6 +17,13 @@
   
     <div id="turma" class="section principal">
       <div id="navegacao">  <!-- gerado pelo navegacao-molde --> </div>
+      <script id="navegacao-molde" type="text/x-handlebars-template">
+        <div class="slide-turmas owl-carousel owl-theme">
+          {{#each turmas}}
+            <img src="{{foto}}" class="item" style="height:150px;"/>
+          {{/each}}
+        </div>
+      </script>
     </div>
     
     <div id="turma-detalhes" class="section">
@@ -33,15 +40,6 @@
 
   </div>
 
-  <!-- Template que será gerado a partir da requisição ajax -->
-  <script id="navegacao-molde" type="text/x-handlebars-template">
-    <div class="slide-turmas owl-carousel owl-theme">
-      {{#each turmas}}
-        <img src="{{foto}}" class="item" style="height:150px;"/>
-      {{/each}}
-    </div>
-  </script>
-
   <!-- Bibliotecas e Dependencias -->
   <script type="text/javascript" src="vendor/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="vendor/jquery.easings.min.js"></script>
@@ -55,11 +53,11 @@
   <script src="scripts/meformei.camera.tracker.js"></script>
 
   <!-- MeFormei Web -->
-  <script src="scripts/meformei.web.camera.tracker.js"></script>
-  <script src="scripts/meformei.web.camera.view.js"></script>
   <script src="scripts/meformei.web.slider.js"></script>
   <script src="scripts/meformei.web.fullpage.js"></script>
-  
+  <script src="scripts/meformei.web.camera.view.js"></script>
+  <script src="scripts/meformei.web.camera.tracker.js"></script>
+
   <!-- Inicialização da Página -->
   <script>
 
@@ -72,8 +70,8 @@
 
     $(document).ready(function() {
       slider.init(turmas);
-      cameraview.init('cameraview','cameraview-wrapper');
-      cameratracker.init("localhost",9001);
+      cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
+      cameratracker.init({ip: "localhost", port: 9001});
     });
   </script>
 

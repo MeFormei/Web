@@ -10,9 +10,9 @@ var movementY = 0;
 var positionCursorX = 0;
 var positionCursorY = 0;
 
-cameraview.init = function(idCanvas,idWrapperCanvas){
-    idDivFeedback = idCanvas;
-    idDivWrapperCanvas = idWrapperCanvas;
+cameraview.init = function(config){
+    idDivFeedback = config.canvasId;
+    idDivWrapperCanvas = config.wrapperId;
 }
 
 cameraview.setCoordinates = function(coordX, coordY) {
@@ -29,9 +29,9 @@ cameraview.animate = function() {
 
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    drawCircle(positionCursorX, positionCursorY);
+    cameraview.drawCircle(positionCursorX, positionCursorY);
 
-    requestAnimationFrame(animate);
+    requestAnimationFrame(cameraview.animate);
 }
 
 cameraview.drawCircle = function(coordX, coordY) {

@@ -4,8 +4,8 @@ var callbacks = { 'direction':{'WEST':null,'EAST':null,'NORTH':null,'SOUTH':null
 var client = {};
 var cameratracker = cameratracker || {};
 
-cameratracker.init = function(ip,port){
-	cameratracker.doConnection(ip,port);
+cameratracker.init = function(config){
+	cameratracker.doConnection(config.ip,config.port);
 }
 
 cameratracker.doConnection = function(ip, port){
