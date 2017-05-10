@@ -9,19 +9,39 @@
   <link rel="stylesheet" type="text/css" href="style/owl.carousel.min.css"/>
   <link rel="stylesheet" type="text/css" href="style/owl.theme.default.min.css"/>  
   <link rel="shortcut icon" type="image/png" href="images/cap.png"/>
-  <script src="script/jquery-3.2.1.min.js"></script>
-  <script src="script/jquery.easings.min.js"></script>
-  <script type="text/javascript" src="script/scrolloverflow.min.js"></script>
-  <script src="script/jquery.fullPage.js"></script>
-  <script type="text/javascript" src="script/owl.carousel.min.js"></script>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $('#fullpage').fullpage({
-        sectionsColor: ['#333', '#F1F1F1', '#F7F7F7'],
-      });
-    });
+</head>
+
+<body>
+  <div id="fullpage">
+  
+    <div id="turma" class="section principal">
+      <div id="navegacao">  <!-- gerado pelo section-principal-template --> </div>
+    </div>
+    
+    <div id="turma-detalhes" class="section">
+      <h1> Detalhes turma </h1>
+    </div>
+
+    <div id="homenageados" class="section">
+      <h1> Detalhes homenageados </h1>
+    </div>
+
+    <div class="feedback-movement">
+      <canvas id="feedback" width="352" height="240"></canvas>
+    </div>
+
+  </div>
+
+  <!-- Template que será gerado a partir da requisição ajax -->
+  <script id="section-principal-template" type="text/x-handlebars-template">
+    <div style="position:absolute; bottom:0;opacity:0.9;height:160px;padding-top:10px;background:#333;" class="control owl-carousel owl-theme">
+      {{#each turmas}}
+        <img src="{{foto}}" class="item" style="height:150px;"/>
+      {{/each}}
+    </div>
   </script>
 
+  <!-- Conteúdo mockado. Simulando API -->
   <script>
      var turmas = [{
         id: 1,
@@ -95,163 +115,23 @@
         foto: "assets/t03.jpg"
      }];
   </script>
-</head>
 
-<body>
-  <div id="fullpage">
-    <div id="turma" class="section principal">
-      <div id="navegacao">
-        <!-- gerado pelo section-principal-template -->
-      </div>
-    </div>
-    
-    <div id="turma-detalhes" class="section">
-      <h1> Detalhes turma </h1>
-    </div>
+  <!-- Bibliotecas e Dependencias -->
+  <script type="text/javascript" src="script/vendor/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="script/vendor/jquery.easings.min.js"></script>
+  <script type="text/javascript" src="script/vendor/scrolloverflow.min.js"></script>
+  <script type="text/javascript" src="script/vendor/jquery.fullPage.js"></script>
+  <script type="text/javascript" src="script/vendor/owl.carousel.min.js"></script>
+  <script type="text/javascript" src="script/vendor/mqtt.min.js"></script>
+  <script type="text/javascript" src="script/vendor/handlebars.min-latest.js"></script>
 
-    <div id="homenageados" class="section">
-      <h1> Detalhes homenageados </h1>
-    </div>
-
-    <div class="feedback-movement">
-        <canvas id="feedback" width="352" height="240"></canvas>
-    </div>
-  </div>
-
-  <script id="section-principal-template" type="text/x-handlebars-template">
-    <div style="position:absolute; bottom:0;opacity:0.9;height:160px;padding-top:10px;background:#333;" class="control owl-carousel owl-theme">
-      {{#each turmas}}
-        <img src="{{foto}}" class="item" style="height:150px;"/>
-      {{/each}}
-    </div>
-  </script>
-
-  <script src="script/mqtt.min.js"></script>
-  <script src="script/meformei.js"></script>
-  <script src="script/handlebars.min-latest.js"></script>
-  <script>
-    var navegacao = $('#navegacao');
-    var source   = $("#section-principal-template").html();
-    var template = Handlebars.compile(source);
-    var html = template({turmas: turmas});
-    navegacao.html(html);
-
-    var owl = $('.owl-carousel');
-    owl.owlCarousel({
-          loop:true,
-          margin:10,
-          nav:false,
-          dots:false,
-          responsive: {
-            600:{
-              items:4
-            },
-            900:{
-              items:6
-            },
-            1200:{
-              items:7 
-            }
-          }
-     });
-
-     function changeCurrentImage(index) {
-        var fotoTurmaUrl = turmas[index].foto;
-        $turma = $('#turma');
-        $turma.css("background", "url('" + fotoTurmaUrl + "') no-repeat");
-        $turma.css("background-size", "100%");
-     }
-
-     changeCurrentImage(0);
-
-     owl.on('changed.owl.carousel', function(event) {
-        console.log(event);
-        var turmaIndex = event.item.index - event.item.count - 1;
-        console.log(turmaIndex);
-        changeCurrentImage(turmaIndex);
-     });
-  </script>
-  <script id="desenho">
-    var canvas = document.getElementById('feedback');
-    var context = canvas.getContext("2d");
-    
-    var iterations = 70;
-    var movementX = 0;
-    var movementY = 0;
-    var positionCursorX = 0;
-    var positionCursorY = 0;
-
-    function setCoordinates(coordX, coordY) {
-        movementX = coordX;
-        movementY = coordY;
-    }
-
-    function animate() {
-        dx = movementX - positionCursorX;
-        dy = movementY - positionCursorY;
-
-        positionCursorX += (dx / iterations);
-        positionCursorY += (dy / iterations);
-
-        context.clearRect(0, 0, canvas.width, canvas.height);
-
-        drawCircle(positionCursorX, positionCursorY);
-
-        requestAnimationFrame(animate);
-    }
-
-    function drawCircle(coordX, coordY) {
-        context.beginPath();
-        context.arc(coordX, coordY, 20, 0, 2 * Math.PI, true);
-        context.fillStyle = "green";
-        context.fill();
-        context.strokeStyle = '#003300';
-        context.stroke();
-    }
-
-    function toggleFeedbackPanel(flag) {
-        var $feedbackMovement = $(".feedback-movement");
-        if (flag) {
-            $feedbackMovement.fadeIn(300);
-        } else {
-            $feedbackMovement.fadeOut(300);
-        }
-    }
-  </script>
-
-  <script id="gestos">
-    doConnection('localhost', 9001);
-
-    onLeft(function () {
-        owl.trigger('next.owl.carousel');
-        // document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
-    });
-
-    onRight(function () {
-        owl.trigger('prev.owl.carousel');
-        // document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
-    });
-
-    onTop(function () {
-        $.fn.fullpage.moveSectionUp();
-        // document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
-    });
-
-    onDown(function () {
-        $.fn.fullpage.moveSectionDown();
-        // document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
-    });
-
-    onPosition(function (position) {
-        if (position === null) {
-            toggleFeedbackPanel(false);
-            return;
-        }
-
-        toggleFeedbackPanel(true);
-        setCoordinates(position.x, position.y);
-        animate();
-    });
+  <!-- MeFormei -->
+  <script type="text/javascript" src="script/camera/meformei.camera.tracker.js"></script>
+  <script type="text/javascript" src="script/meformei.web.camera.tracker.js"></script>
+  <script type="text/javascript" src="script/meformei.web.camera.view.js"></script>
+  <script type="text/javascript" src="script/meformei.web.slider.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() { $('#fullpage').fullpage({sectionsColor: ['#333', '#F1F1F1', '#F7F7F7']});});
   </script>
 
 </body>
