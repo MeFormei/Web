@@ -3,11 +3,12 @@
 <head>
   <title>Me Formei</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style/layout.css">
-  <link rel="stylesheet" href="style/style.css">
-  <link rel="stylesheet" href="style/jquery.fullPage.css">
-  <link rel="stylesheet" type="text/css" href="style/owl.carousel.min.css"/>
-  <link rel="stylesheet" type="text/css" href="style/owl.theme.default.min.css"/>  
+  <link rel="stylesheet" href="vendor/layout.css">
+  <link rel="stylesheet" href="vendor/style.css">
+  <link rel="stylesheet" href="vendor/jquery.fullPage.css">
+  <link rel="stylesheet" href="vendor/owl.carousel.min.css"/>
+  <link rel="stylesheet" href="vendor/owl.theme.default.min.css"/>  
+  <link rel="stylesheet" href="styles/meformei.css"/>  
   <link rel="shortcut icon" type="image/png" href="images/cap.png"/>
 </head>
 
@@ -15,7 +16,7 @@
   <div id="fullpage">
   
     <div id="turma" class="section principal">
-      <div id="navegacao">  <!-- gerado pelo section-principal-template --> </div>
+      <div id="navegacao">  <!-- gerado pelo navegacao-molde --> </div>
     </div>
     
     <div id="turma-detalhes" class="section">
@@ -26,112 +27,54 @@
       <h1> Detalhes homenageados </h1>
     </div>
 
-    <div class="feedback-movement">
-      <canvas id="feedback" width="352" height="240"></canvas>
+    <div class="cameraview-wrapper">
+      <canvas id="cameraview" width="352" height="240"></canvas>
     </div>
 
   </div>
 
   <!-- Template que será gerado a partir da requisição ajax -->
-  <script id="section-principal-template" type="text/x-handlebars-template">
-    <div style="position:absolute; bottom:0;opacity:0.9;height:160px;padding-top:10px;background:#333;" class="control owl-carousel owl-theme">
+  <script id="navegacao-molde" type="text/x-handlebars-template">
+    <div class="slide-turmas owl-carousel owl-theme">
       {{#each turmas}}
         <img src="{{foto}}" class="item" style="height:150px;"/>
       {{/each}}
     </div>
   </script>
 
-  <!-- Conteúdo mockado. Simulando API -->
-  <script>
-     var turmas = [{
-        id: 1,
-        nome: "Turma NullPointer",
-        patrono: "Maria",
-        paraninfo: "José",
-        curso: "Bacharelado em Tecnologia da Informação",
-        instituicao: "UFRN",
-        reitor: "Angela Paiva Cruz",
-        coordenador: "Girão ",
-        vice_cordenador: "Vice Girão",
-        foto: "assets/t01.jpg"
-     },
-     {
-        id: 2,
-        nome: "Turma NullPointer",
-        patrono: "Maria",
-        paraninfo: "José",
-        curso: "Bacharelado em Tecnologia da Informação",
-        instituicao: "UFRN",
-        reitor: "Angela Paiva Cruz",
-        coordenador: "Girão ",
-        vice_cordenador: "Vice Girão",
-        foto: "assets/t02.jpg"
-     },
-     {
-        id: 3,
-        nome: "Turma NullPointer",
-        patrono: "Maria",
-        paraninfo: "José",
-        curso: "Bacharelado em Tecnologia da Informação",
-        instituicao: "UFRN",
-        reitor: "Angela Paiva Cruz",
-        coordenador: "Girão ",
-        vice_cordenador: "Vice Girão",
-        foto: "assets/t03.jpg"
-     },{
-        id: 4,
-        nome: "Turma NullPointer",
-        patrono: "Maria",
-        paraninfo: "José",
-        curso: "Bacharelado em Tecnologia da Informação",
-        instituicao: "UFRN",
-        reitor: "Angela Paiva Cruz",
-        coordenador: "Girão ",
-        vice_cordenador: "Vice Girão",
-        foto: "assets/t04.jpg"
-     },
-     {
-        id: 5,
-        nome: "Turma NullPointer",
-        patrono: "Maria",
-        paraninfo: "José",
-        curso: "Bacharelado em Tecnologia da Informação",
-        instituicao: "UFRN",
-        reitor: "Angela Paiva Cruz",
-        coordenador: "Girão ",
-        vice_cordenador: "Vice Girão",
-        foto: "assets/t05.jpg"
-     },
-     {
-        id: 6,
-        nome: "Turma NullPointer",
-        patrono: "Maria",
-        paraninfo: "José",
-        curso: "Bacharelado em Tecnologia da Informação",
-        instituicao: "UFRN",
-        reitor: "Angela Paiva Cruz",
-        coordenador: "Girão ",
-        vice_cordenador: "Vice Girão",
-        foto: "assets/t03.jpg"
-     }];
-  </script>
-
   <!-- Bibliotecas e Dependencias -->
-  <script type="text/javascript" src="script/vendor/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="script/vendor/jquery.easings.min.js"></script>
-  <script type="text/javascript" src="script/vendor/scrolloverflow.min.js"></script>
-  <script type="text/javascript" src="script/vendor/jquery.fullPage.js"></script>
-  <script type="text/javascript" src="script/vendor/owl.carousel.min.js"></script>
-  <script type="text/javascript" src="script/vendor/mqtt.min.js"></script>
-  <script type="text/javascript" src="script/vendor/handlebars.min-latest.js"></script>
+  <script type="text/javascript" src="vendor/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="vendor/jquery.easings.min.js"></script>
+  <script type="text/javascript" src="vendor/jquery.fullPage.js"></script>
+  <script type="text/javascript" src="vendor/scrolloverflow.min.js"></script>
+  <script type="text/javascript" src="vendor/owl.carousel.min.js"></script>
+  <script type="text/javascript" src="vendor/mqtt.min.js"></script>
+  <script type="text/javascript" src="vendor/handlebars.min-latest.js"></script>
 
-  <!-- MeFormei -->
-  <script src="script/camera/meformei.camera.tracker.js"></script>
-  <script src="script/meformei.web.camera.tracker.js" mqtt-ip="localhost"></script>
-  <script src="script/meformei.web.camera.view.js" id-wrapper-canvas="feedback-movement" id-canvas="feedback"></script>
-  <script src="script/meformei.web.slider.js"></script>
+  <!-- MeFormei Camera -->
+  <script src="scripts/meformei.camera.tracker.js"></script>
+
+  <!-- MeFormei Web -->
+  <script src="scripts/meformei.web.camera.tracker.js"></script>
+  <script src="scripts/meformei.web.camera.view.js"></script>
+  <script src="scripts/meformei.web.slider.js"></script>
+  <script src="scripts/meformei.web.fullpage.js"></script>
+  
+  <!-- Inicialização da Página -->
   <script>
-    $(document).ready(function() { $('#fullpage').fullpage({sectionsColor: ['#333', '#F1F1F1', '#F7F7F7']});});
+
+    var turmas = [{id: 1, nome: "Turma NullPointer", foto: "assets/t01.jpg" },
+     {id: 2, nome: "Turma GarbageCollector", foto: "assets/t02.jpg"},
+     {id: 3, nome: "Turma OutOfBound", foto: "assets/t03.jpg"},
+     {id: 4, nome: "Turma James Bond", foto: "assets/t04.jpg"},
+     {id: 5, nome: "Turma Aligator", foto: "assets/t05.jpg"},
+     {id: 6, nome: "Turma Head And Shoulders", foto: "assets/t03.jpg"}];
+
+    $(document).ready(function() {
+      slider.init(turmas);
+      cameraview.init('cameraview','cameraview-wrapper');
+      cameratracker.init("localhost",9001);
+    });
   </script>
 
 </body>

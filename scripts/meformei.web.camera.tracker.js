@@ -1,34 +1,30 @@
-var mqttip = document.currentScript.getAttribute('mqtt-ip').toString();
-
-doConnection(mqttip, 9001);
-
-onLeft(function () {
+cameratracker.onLeft(function () {
     owl.trigger('next.owl.carousel');
     // document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
 });
 
-onRight(function () {
+cameratracker.onRight(function () {
     owl.trigger('prev.owl.carousel');
     // document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
 });
 
-onTop(function () {
+cameratracker.onTop(function () {
     $.fn.fullpage.moveSectionUp();
     // document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
 });
 
-onDown(function () {
+cameratracker.onDown(function () {
     $.fn.fullpage.moveSectionDown();
     // document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
 });
 
-onPosition(function (position) {
+cameratracker.onPosition(function (position) {
     if (position === null) {
-        toggleFeedbackPanel(false);
+        cameraview.toggleFeedbackPanel(false);
         return;
     }
 
-    toggleFeedbackPanel(true);
-    setCoordinates(position.x, position.y);
-    animate();
+    cameraview.toggleFeedbackPanel(true);
+    cameraview.setCoordinates(position.x, position.y);
+    cameraview.animate();
 });

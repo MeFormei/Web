@@ -1,21 +1,26 @@
-var idDivFeedback = document.currentScript.getAttribute('id-canvas').toString();
-var idDivWrapperCanvas = document.currentScript.getAttribute('id-wrapper-canvas').toString();
+var cameraview = cameraview || {};
 
+var idDivFeedback = idDivFeedback || "cameraview";
+var idDivWrapperCanvas = idDivWrapperCanvas || "cameraview-wrapper" ;
 var canvas = document.getElementById(idDivFeedback);
 var context = canvas.getContext("2d");
-
 var iterations = 70;
 var movementX = 0;
 var movementY = 0;
 var positionCursorX = 0;
 var positionCursorY = 0;
 
-function setCoordinates(coordX, coordY) {
+cameraview.init = function(idCanvas,idWrapperCanvas){
+    idDivFeedback = idCanvas;
+    idDivWrapperCanvas = idWrapperCanvas;
+}
+
+cameraview.setCoordinates = function(coordX, coordY) {
     movementX = coordX;
     movementY = coordY;
 }
 
-function animate() {
+cameraview.animate = function() {
     dx = movementX - positionCursorX;
     dy = movementY - positionCursorY;
 
@@ -29,7 +34,7 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-function drawCircle(coordX, coordY) {
+cameraview.drawCircle = function(coordX, coordY) {
     context.beginPath();
     context.arc(coordX, coordY, 20, 0, 2 * Math.PI, true);
     context.fillStyle = "green";
@@ -38,7 +43,7 @@ function drawCircle(coordX, coordY) {
     context.stroke();
 }
 
-function toggleFeedbackPanel(flag) {
+cameraview.toggleFeedbackPanel = function(flag) {
     var $feedbackMovement = $(idDivWrapperCanvas);
     if (flag) {
         $feedbackMovement.fadeIn(300);
