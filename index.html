@@ -23,9 +23,8 @@
   </script>
 
   <script>
-
      var turmas = [{
-        id: 0,
+        id: 1,
         nome: "Turma NullPointer",
         patrono: "Maria",
         paraninfo: "José",
@@ -37,7 +36,7 @@
         foto: "assets/t01.jpg"
      },
      {
-        id: 0,
+        id: 2,
         nome: "Turma NullPointer",
         patrono: "Maria",
         paraninfo: "José",
@@ -49,7 +48,7 @@
         foto: "assets/t02.jpg"
      },
      {
-        id: 0,
+        id: 3,
         nome: "Turma NullPointer",
         patrono: "Maria",
         paraninfo: "José",
@@ -60,7 +59,7 @@
         vice_cordenador: "Vice Girão",
         foto: "assets/t03.jpg"
      },{
-        id: 0,
+        id: 4,
         nome: "Turma NullPointer",
         patrono: "Maria",
         paraninfo: "José",
@@ -72,7 +71,7 @@
         foto: "assets/t04.jpg"
      },
      {
-        id: 0,
+        id: 5,
         nome: "Turma NullPointer",
         patrono: "Maria",
         paraninfo: "José",
@@ -84,7 +83,7 @@
         foto: "assets/t05.jpg"
      },
      {
-        id: 0,
+        id: 6,
         nome: "Turma NullPointer",
         patrono: "Maria",
         paraninfo: "José",
@@ -95,14 +94,12 @@
         vice_cordenador: "Vice Girão",
         foto: "assets/t03.jpg"
      }];
-
   </script>
-
 </head>
 
 <body>
   <div id="fullpage">
-    <div id="turma" class="section principal" style="background: url('assets/t01.jpg') no-repeat;background-size: 100%;">
+    <div id="turma" class="section principal">
       <div id="navegacao">
         <!-- gerado pelo section-principal-template -->
       </div>
@@ -116,6 +113,11 @@
       <h1> Detalhes homenageados </h1>
     </div>
 
+    <div class="feedback-movement">
+        <canvas id="feedback" width="352" height="240"></canvas>
+    </div>
+  </div>
+
   <script id="section-principal-template" type="text/x-handlebars-template">
     <div style="position:absolute; bottom:0;opacity:0.9;height:160px;padding-top:10px;background:#333;" class="control owl-carousel owl-theme">
       {{#each turmas}}
@@ -128,13 +130,14 @@
   <script src="script/meformei.js"></script>
   <script src="script/handlebars.min-latest.js"></script>
   <script>
-    var control = $('#turma');
     var navegacao = $('#navegacao');
     var source   = $("#section-principal-template").html();
     var template = Handlebars.compile(source);
     var html = template({turmas: turmas});
     navegacao.html(html);
-    $('.owl-carousel').owlCarousel({
+
+    var owl = $('.owl-carousel');
+    owl.owlCarousel({
           loop:true,
           margin:10,
           nav:false,
@@ -150,6 +153,22 @@
               items:7 
             }
           }
+     });
+
+     function changeCurrentImage(index) {
+        var fotoTurmaUrl = turmas[index].foto;
+        $turma = $('#turma');
+        $turma.css("background", "url('" + fotoTurmaUrl + "') no-repeat");
+        $turma.css("background-size", "100%");
+     }
+
+     changeCurrentImage(0);
+
+     owl.on('changed.owl.carousel', function(event) {
+        console.log(event);
+        var turmaIndex = event.item.index - event.item.count - 1;
+        console.log(turmaIndex);
+        changeCurrentImage(turmaIndex);
      });
   </script>
   <script id="desenho">
@@ -201,31 +220,26 @@
   </script>
 
   <script id="gestos">
-
     doConnection('localhost', 9001);
 
-    control.on('afterChange', function(event, slick, currentSlide, nextSlide){
-
-    });
-
     onLeft(function () {
-        control.slick('slickNext');
-        document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
+        owl.trigger('next.owl.carousel');
+        // document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
     });
 
     onRight(function () {
-        control.slick('slickPrev');
-        document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
+        owl.trigger('prev.owl.carousel');
+        // document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
     });
 
     onTop(function () {
-        console.log("Movendo para o topo");
-        document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
+        $.fn.fullpage.moveSectionUp();
+        // document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
     });
 
     onDown(function () {
-        console.log("Movendo para baixo");
-        document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
+        $.fn.fullpage.moveSectionDown();
+        // document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
     });
 
     onPosition(function (position) {
@@ -238,7 +252,6 @@
         setCoordinates(position.x, position.y);
         animate();
     });
-
   </script>
 
 </body>
