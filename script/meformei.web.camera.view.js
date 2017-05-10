@@ -1,6 +1,7 @@
-// var idDivFeedback = document.currentScript.getAttribute('id-canvas');
-// var idDivWrapperCanvas = document.currentScript.getAttribute('id-wrapper-canvas');
-var canvas = document.getElementById('feedback');
+var idDivFeedback = document.currentScript.getAttribute('id-canvas').toString();
+var idDivWrapperCanvas = document.currentScript.getAttribute('id-wrapper-canvas').toString();
+
+var canvas = document.getElementById(idDivFeedback);
 var context = canvas.getContext("2d");
 
 var iterations = 70;
@@ -38,7 +39,7 @@ function drawCircle(coordX, coordY) {
 }
 
 function toggleFeedbackPanel(flag) {
-    var $feedbackMovement = $(".feedback-movement");
+    var $feedbackMovement = $(idDivWrapperCanvas);
     if (flag) {
         $feedbackMovement.fadeIn(300);
     } else {

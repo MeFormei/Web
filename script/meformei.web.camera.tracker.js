@@ -1,4 +1,6 @@
-doConnection('localhost', 9001);
+var mqttip = document.currentScript.getAttribute('mqtt-ip').toString();
+
+doConnection(mqttip, 9001);
 
 onLeft(function () {
     owl.trigger('next.owl.carousel');

@@ -126,11 +126,11 @@
   <script type="text/javascript" src="script/vendor/handlebars.min-latest.js"></script>
 
   <!-- MeFormei -->
-  <script type="text/javascript" src="script/camera/meformei.camera.tracker.js"></script>
-  <script type="text/javascript" src="script/meformei.web.camera.tracker.js"></script>
-  <script type="text/javascript" src="script/meformei.web.camera.view.js"></script>
-  <script type="text/javascript" src="script/meformei.web.slider.js"></script>
-  <script type="text/javascript">
+  <script src="script/camera/meformei.camera.tracker.js"></script>
+  <script src="script/meformei.web.camera.tracker.js" mqtt-ip="localhost"></script>
+  <script src="script/meformei.web.camera.view.js" id-wrapper-canvas="feedback-movement" id-canvas="feedback"></script>
+  <script src="script/meformei.web.slider.js"></script>
+  <script>
     $(document).ready(function() { $('#fullpage').fullpage({sectionsColor: ['#333', '#F1F1F1', '#F7F7F7']});});
   </script>
 
