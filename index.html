@@ -64,21 +64,14 @@
     var online = true;
 
     if(online){
-      $(document).ready(function() {
-        
-        $.getJSON("http://meformei.ddns.net/turma", function(turmas){
-          slider.init(turmas);
-        })
-        .done(function(){
-          cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
-          cameratracker.init({ip: "localhost", port: 9001});
-        })
-        .fail(function() {
-          console.error("Falha ao obter dados do servidor.");
-          alert("Falha ao obter dados do servidor.");
-        });
-
-      });
+      $.getJSON("http://meformei.ddns.net/turma")
+      .then(turmas => slider.init(turmas))
+      .done(() => {
+        cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
+        cameratracker.init({ip: "localhost", port: 9001});
+      })
+      .fail(() => alert("Falha ao obter dados do servidor."));
+      
     } else {
       var mockTurmas = [{id: 1, nome: "Turma NullPointer", foto: "assets/t01.jpg" },
        {id: 2, nome: "Turma GarbageCollector", foto: "assets/t02.jpg"},
@@ -87,9 +80,9 @@
        {id: 5, nome: "Turma Aligator", foto: "assets/t05.jpg"},
        {id: 6, nome: "Turma Head And Shoulders", foto: "assets/t03.jpg"}];
 
-        slider.init(mockTurmas);
-        cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
-        cameratracker.init({ip: "localhost", port: 9001});
+      slider.init(mockTurmas);
+      cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
+      cameratracker.init({ip: "localhost", port: 9001});
     }
   </script>
 
