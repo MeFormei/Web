@@ -3,7 +3,7 @@ var slider = slider || {};
 var navegacaoDiv = $('#navegacao');
 var navegacaoMolde = $("#navegacao-molde").html();
 var navegacaoTemplate = Handlebars.compile(navegacaoMolde);
-
+var owl;
 slider.turmas = {};
 
 slider.init = function(turmas){
@@ -22,7 +22,7 @@ slider.carregarTurmas = function(turmas){
   slider.turmas = turmas;
   var navegacaoHtml = navegacaoTemplate({'turmas': turmas});
   navegacaoDiv.html(navegacaoHtml);
-  var owl = $('.owl-carousel');
+  owl = $('.owl-carousel');
   owl.owlCarousel({
         loop:true,
         margin:10,
