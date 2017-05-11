@@ -49,7 +49,7 @@ cameraview.drawCircle = function(coordX, coordY) {
 }
 
 cameraview.toggleFeedbackPanel = function(flag) {
-    var $feedbackMovement = $('#' + idDivWrapperCanvas);
+    var $feedbackMovement = $('.' + idDivWrapperCanvas);
     if (flag) {
         $feedbackMovement.fadeIn(300);
     } else {

@@ -20,12 +20,14 @@ cameratracker.onDown(function () {
 
 cameratracker.onPosition(function (position) {
     if (position === null) {
+        console.log('position null')
         cameraview.toggleFeedbackPanel(false);
         cameraview.drawable = false;
-        return;
+    } else {
+        cameraview.toggleFeedbackPanel(true);
+        cameraview.drawable = true;
+        cameraview.setCoordinates(position.x, position.y);    
     }
 
-    cameraview.toggleFeedbackPanel(true);
-    cameraview.drawable = true;
-    cameraview.setCoordinates(position.x, position.y);
+    
 });
