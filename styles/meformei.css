@@ -3,10 +3,11 @@
 }
 
 .cameraview-wrapper {
-	background-color: black;
-	border: 3px solid white;
-	opacity: 0.7;
+	background-color: #333;
+	border: 1px solid white;
+	opacity: 0.6;
 	position: fixed;
     top:10px;
     left:10px;
+    box-shadow: inset 50px 50px 300px rgba(0,0,0,0.8);
 }

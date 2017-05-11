@@ -4,15 +4,19 @@ var idDivFeedback = idDivFeedback || "cameraview";
 var idDivWrapperCanvas = idDivWrapperCanvas || "cameraview-wrapper" ;
 var canvas = document.getElementById(idDivFeedback);
 var context = canvas.getContext("2d");
-var iterations = 70;
+var iterations = 3;
 var movementX = 0;
 var movementY = 0;
 var positionCursorX = 0;
 var positionCursorY = 0;
 
+cameraview.drawable = false;
+
 cameraview.init = function(config){
     idDivFeedback = config.canvasId;
     idDivWrapperCanvas = config.wrapperId;
+    cameraview.animate();
+    cameraview.toggleFeedbackPanel(false);
 }
 
 cameraview.setCoordinates = function(coordX, coordY) {
@@ -29,7 +33,8 @@ cameraview.animate = function() {
 
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    cameraview.drawCircle(positionCursorX, positionCursorY);
+    if(cameraview.drawable)
+        cameraview.drawCircle(positionCursorX, positionCursorY);
 
     requestAnimationFrame(cameraview.animate);
 }
