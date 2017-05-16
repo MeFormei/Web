@@ -1,19 +1,40 @@
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+var timeoutHandle = null;
+
+async function execOpenedSlider(action) {
+    $('.slide-turmas').addClass('aberto');
+    $('.slide-turmas').removeClass('fechado');
+    await sleep(500);
+    action();
+    if(timeoutHandle !== null) {
+        window.clearTimeout(timeoutHandle);
+    }
+    timeoutHandle = window.setTimeout(function(){ 
+        $('.slide-turmas').addClass('fechado');
+        $('.slide-turmas').removeClass('aberto');
+    }, 2000);
+}
+
 cameratracker.onLeft(function () {
-    owl.trigger('next.owl.carousel');
-    // document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
+    execOpenedSlider(function() {
+        owl.trigger('next.owl.carousel');
+        // document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
+    });
 });
 
 cameratracker.onRight(function () {
-    owl.trigger('prev.owl.carousel');
-    // document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
+    execOpenedSlider(function() {
+        owl.trigger('prev.owl.carousel');
+        // document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
+    });
 });
 
 cameratracker.onTop(function () {
     $.fn.fullpage.moveSectionUp();
-    $('.slide-turmas').addClass('aberto');
-    setTimeout(function(){ 
-        $('.slide-turmas').addClass('aberto');
-    }, 2000);
+
     // document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
 });
 
