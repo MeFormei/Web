@@ -1,11 +1,27 @@
+function updateSoundHorizontal() { 
+    var audio = document.getElementById('moveScreenHorizontal');
+    var source = document.getElementById('sourceMoveScreenHorizontal');
+    source.src = "cursor-move.mp3";
+    audio.load(); //call this to just preload the audio without playing
+    audio.play(); //call this to play the song right away
+}
+
+function updateSoundVertical() { 
+    var audio = document.getElementById('moveScreenVertical');
+    var source = document.getElementById('sourceMoveScreenVertical');
+    source.src = "selection.mp3";
+    audio.load(); //call this to just preload the audio without playing
+    audio.play(); //call this to play the song right away
+}
+
 cameratracker.onLeft(function () {
     owl.trigger('next.owl.carousel');
-    // document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
+    updateSoundHorizontal();
 });
 
 cameratracker.onRight(function () {
     owl.trigger('prev.owl.carousel');
-    // document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
+    updateSoundHorizontal();
 });
 
 cameratracker.onTop(function () {
@@ -14,12 +30,12 @@ cameratracker.onTop(function () {
     setTimeout(function(){ 
         $('.slide-turmas').addClass('aberto');
     }, 2000);
-    // document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
+    updateSoundVertical();
 });
 
 cameratracker.onDown(function () {
     $.fn.fullpage.moveSectionDown();
-    // document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
+    updateSoundVertical();
 });
 
 cameratracker.onPosition(function (position) {
