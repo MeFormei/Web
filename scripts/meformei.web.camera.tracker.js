@@ -1,7 +1,7 @@
 function updateSoundHorizontal() { 
     var audio = document.getElementById('moveScreenHorizontal');
     var source = document.getElementById('sourceMoveScreenHorizontal');
-    source.src = "cursor-move.mp3";
+    source.src = "sounds/effects/cursor-move.mp3";
     audio.load(); //call this to just preload the audio without playing
     audio.play(); //call this to play the song right away
 }
@@ -9,7 +9,7 @@ function updateSoundHorizontal() {
 function updateSoundVertical() { 
     var audio = document.getElementById('moveScreenVertical');
     var source = document.getElementById('sourceMoveScreenVertical');
-    source.src = "selection.mp3";
+    source.src = "sounds/effects/selection.mp3";
     audio.load(); //call this to just preload the audio without playing
     audio.play(); //call this to play the song right away
 }
