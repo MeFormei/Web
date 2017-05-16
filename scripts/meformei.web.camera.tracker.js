@@ -10,6 +10,10 @@ cameratracker.onRight(function () {
 
 cameratracker.onTop(function () {
     $.fn.fullpage.moveSectionUp();
+    $('.slide-turmas').addClass('aberto');
+    setTimeout(function(){ 
+        $('.slide-turmas').addClass('aberto');
+    }, 2000);
     // document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
 });
 

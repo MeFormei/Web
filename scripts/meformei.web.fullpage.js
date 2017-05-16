@@ -1,3 +1,12 @@
  $(document).ready(function() {
-      $('#fullpage').fullpage({sectionsColor: ['#333', '#F1F1F1', '#F7F7F7']});
+      $('#fullpage').fullpage({
+      	sectionsColor: ['#fff', '#F1F1F1', '#F7F7F7'],
+      	onLeave: function(index, nextIndex, direction){
+      		if (index == '1'){
+      			$('.slide-turmas').addClass('aberto');
+      		} else {
+				$('.slide-turmas').removeClass('aberto');
+      		}
+      	},
+  });
 });

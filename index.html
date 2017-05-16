@@ -10,24 +10,34 @@
   <link rel="stylesheet" href="vendor/owl.theme.default.min.css"/>  
   <link rel="stylesheet" href="styles/meformei.css"/>  
   <link rel="shortcut icon" type="image/png" href="images/cap.png"/>
+  <link rel="vendor/animate.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 </head>
 
 <body>
   <div id="fullpage">
   
     <div id="turma" class="section principal">
+      <div class="vignette"></div>
+      <h2 style="text-align:right;font-weight:600;color:white;position:absolute;right:20px;bottom:165px;text-shadow: 2px 2px #000;">Turma NullPointerException</h2>
       <div id="navegacao">  <!-- gerado pelo navegacao-molde --> </div>
       <script id="navegacao-molde" type="text/x-handlebars-template">
         <div class="slide-turmas owl-carousel owl-theme">
           {{#each turmas}}
-            <img src="{{foto}}" class="item" style="height:150px;"/>
+            <img src="{{foto}}" class="item" style="height:150px; box-shadow: 0 0 200px rgba(0,0,0,0.9) inset;"/>
           {{/each}}
         </div>
       </script>
     </div>
     
-    <div id="turma-detalhes" class="section">
-      <h1> Detalhes turma </h1>
+    <div id="turma-detalhes" class="section" style="z-index:2;">
+      <div style="float:left;height:100%;width:30%;background-color:#FFFFFF;">
+
+      </div>
+      <div style="float:right;height:100%;width:70%;background-color:#F1F1F1;">
+          <h2 style="text-align:center;font-weight:300;">Turma {{NullPointerException}}</h2>
+      </div>
+
     </div>
 
     <div id="homenageados" class="section">
@@ -62,7 +72,7 @@
   <!-- Inicialização da Página -->
   <script>
 
-    var online = true;
+    var online = false;
     if(online){
       $.getJSON("http://meformei.ddns.net/turma")
       .then(turmas => slider.init(turmas))

@@ -14,8 +14,8 @@ slider.changeCurrentImage = function(index) {
   var i = index % slider.turmas.length;
   var fotoTurmaUrl = slider.turmas[i].foto;
   $turma = $('#turma');
-  $turma.css("background", "url('" + fotoTurmaUrl + "') no-repeat");
-  $turma.css("background-size", "100%");
+  $turma.css("background", "url('" + fotoTurmaUrl + "') center fixed");
+  $turma.css("background-size", "cover");
 }
 
 slider.carregarTurmas = function(turmas){
