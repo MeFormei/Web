@@ -18,29 +18,44 @@ async function execOpenedSlider(action) {
     }, 2000);
 }
 
+function updateSoundHorizontal() { 
+    var audio = document.getElementById('moveScreenHorizontal');
+    var source = document.getElementById('sourceMoveScreenHorizontal');
+    source.src = "sounds/effects/cursor-move.mp3";
+    audio.load(); //call this to just preload the audio without playing
+    audio.play(); //call this to play the song right away
+}
+
+function updateSoundVertical() { 
+    var audio = document.getElementById('moveScreenVertical');
+    var source = document.getElementById('sourceMoveScreenVertical');
+    source.src = "sounds/effects/selection.mp3";
+    audio.load(); //call this to just preload the audio without playing
+    audio.play(); //call this to play the song right away
+}
+
 cameratracker.onLeft(function () {
     execOpenedSlider(function() {
         owl.trigger('next.owl.carousel');
-        // document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
+        updateSoundHorizontal();
     });
 });
 
 cameratracker.onRight(function () {
     execOpenedSlider(function() {
         owl.trigger('prev.owl.carousel');
-        // document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
+        updateSoundHorizontal();
     });
 });
 
 cameratracker.onTop(function () {
     $.fn.fullpage.moveSectionUp();
-
-    // document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
+    updateSoundVertical();
 });
 
 cameratracker.onDown(function () {
     $.fn.fullpage.moveSectionDown();
-    // document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
+    updateSoundVertical();
 });
 
 cameratracker.onPosition(function (position) {
@@ -53,6 +68,4 @@ cameratracker.onPosition(function (position) {
         cameraview.drawable = true;
         cameraview.setCoordinates(position.x, position.y);    
     }
-
-    
 });
