@@ -3,151 +3,105 @@
 <head>
   <title>Me Formei</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style/layout.css">
-  <link rel="stylesheet" href="style/style.css">
-  <link rel="stylesheet" href="style/jquery.fullPage.css">
-  <link rel="stylesheet" type="text/css" href="style/slick.css"/>
-  <link rel="stylesheet" type="text/css" href="style/slick-theme.css"/>  
+  <link rel="stylesheet" href="vendor/layout.css">
+  <link rel="stylesheet" href="vendor/style.css">
+  <link rel="stylesheet" href="vendor/jquery.fullPage.css">
+  <link rel="stylesheet" href="vendor/owl.carousel.min.css"/>
+  <link rel="stylesheet" href="vendor/owl.theme.default.min.css"/>  
+  <link rel="stylesheet" href="styles/meformei.css"/>  
   <link rel="shortcut icon" type="image/png" href="images/cap.png"/>
-  <script src="script/jquery-3.2.1.min.js"></script>
-  <script src="script/jquery.easings.min.js"></script>
-  <script type="text/javascript" src="script/scrolloverflow.min.js"></script>
-  <script src="script/jquery.fullPage.js"></script>
-  <script type="text/javascript" src="script/slick.min.js"></script>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $('#fullpage').fullpage({
-        sectionsColor: ['#333', '#F1F1F1', '#333'],
-      });
-    });
-  </script>
-
+  <link rel="vendor/animate.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 </head>
 
 <body>
+  
+  <audio id="moveScreenHorizontal" preload="auto" autoplay="false">
+    <source id="sourceMoveScreenHorizontal" src="sounds/effects/cursor-move.mp3"></source>
+	</audio>
+  <audio id="moveScreenVertical" preload="auto" autoplay="false">
+    <source id="sourceMoveScreenVertical" src="sounds/effects/selection.mp3"></source>
+	</audio>
+
   <div id="fullpage">
-    <div class="section principal" style="background: url('assets/t01.jpg') no-repeat;background-size: 100%;">
-      <div style="position:absolute; bottom:0;" class="control">
-        <img src="assets/t01.jpg" style="height:150px;">
-        <img src="assets/t02.jpg" style="height:150px;">
-        <img src="assets/t03.jpg" style="height:150px;">
-        <img src="assets/t04.jpg" style="height:150px;">
-        <img src="assets/t05.jpg" style="height:150px;">
-        <img src="assets/t01.jpg" style="height:150px;">
-        <img src="assets/t02.jpg" style="height:150px;">
-        <img src="assets/t03.jpg" style="height:150px;">
-        <img src="assets/t04.jpg" style="height:150px;">
-        <img src="assets/t05.jpg" style="height:150px;">
-        <img src="assets/t01.jpg" style="height:150px;">
-        <img src="assets/t02.jpg" style="height:150px;">
-        <img src="assets/t03.jpg" style="height:150px;">
-        <img src="assets/t04.jpg" style="height:150px;">
-        <img src="assets/t05.jpg" style="height:150px;">
-      </div>
+  
+    <div id="turma" class="section principal">
+      <div class="vignette"></div>
+      <h2 style="text-align:right;font-weight:600;color:white;position:absolute;right:20px;bottom:165px;text-shadow: 2px 2px #000;">Turma NullPointerException</h2>
+      <div id="navegacao">  <!-- gerado pelo navegacao-molde --> </div>
+      <script id="navegacao-molde" type="text/x-handlebars-template">
+        <div class="slide-turmas owl-carousel owl-theme">
+          {{#each turmas}}
+            <img src="{{foto}}" class="item" style="height:150px; box-shadow: 0 0 200px rgba(0,0,0,0.9) inset;"/>
+          {{/each}}
+        </div>
+      </script>
     </div>
     
-    <div class="section">
-      <h1> Detalhes turma </h1>
+    <div id="turma-detalhes" class="section" style="z-index:2;">
+      <div style="float:left;height:100%;width:30%;background-color:#FFFFFF;">
+
+      </div>
+      <div style="float:right;height:100%;width:70%;background-color:#F1F1F1;">
+          <h2 style="text-align:center;font-weight:300;">Turma {{NullPointerException}}</h2>
+      </div>
+
     </div>
 
-    <div class="section">
+    <div id="homenageados" class="section">
       <h1> Detalhes homenageados </h1>
     </div>
 
-  <script src="script/mqtt.min.js"></script>
-  <script src="script/meformei.js"></script>
-  <script id="desenho">
-    var canvas = document.getElementById('feedback');
-    var context = canvas.getContext("2d");
-    
-    var iterations = 70;
-    var movementX = 0;
-    var movementY = 0;
-    var positionCursorX = 0;
-    var positionCursorY = 0;
 
-    function setCoordinates(coordX, coordY) {
-        movementX = coordX;
-        movementY = coordY;
+  </div>
+  
+  <div class="cameraview-wrapper">
+    <canvas id="cameraview" width="352" height="240"></canvas>
+  </div>
+
+  <!-- Bibliotecas e Dependencias -->
+  <script type="text/javascript" src="vendor/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="vendor/jquery.easings.min.js"></script>
+  <script type="text/javascript" src="vendor/jquery.fullPage.js"></script>
+  <script type="text/javascript" src="vendor/scrolloverflow.min.js"></script>
+  <script type="text/javascript" src="vendor/owl.carousel.min.js"></script>
+  <script type="text/javascript" src="vendor/mqtt.min.js"></script>
+  <script type="text/javascript" src="vendor/handlebars.min-latest.js"></script>
+
+  <!-- MeFormei Camera -->
+  <script src="scripts/meformei.camera.tracker.js"></script>
+
+  <!-- MeFormei Web -->
+  <script src="scripts/meformei.web.slider.js"></script>
+  <script src="scripts/meformei.web.fullpage.js"></script>
+  <script src="scripts/meformei.web.camera.view.js"></script>
+  <script src="scripts/meformei.web.camera.tracker.js"></script>
+
+  <!-- Inicialização da Página -->
+  <script>
+
+    var online = false;
+    if(online){
+      $.getJSON("http://meformei.ddns.net/turma")
+      .then(turmas => slider.init(turmas))
+      .done(() => {
+        cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
+        cameratracker.init({ip: "localhost", port: 9001});
+      })
+      .fail(() => alert("Falha ao obter dados do servidor."));
+      
+    } else {
+      var mockTurmas = [{id: 1, nome: "Turma NullPointer", foto: "assets/t01.jpg" },
+       {id: 2, nome: "Turma GarbageCollector", foto: "assets/t02.jpg"},
+       {id: 3, nome: "Turma OutOfBound", foto: "assets/t03.jpg"},
+       {id: 4, nome: "Turma James Bond", foto: "assets/t04.jpg"},
+       {id: 5, nome: "Turma Aligator", foto: "assets/t05.jpg"},
+       {id: 6, nome: "Turma Head And Shoulders", foto: "assets/t03.jpg"}];
+
+      slider.init(mockTurmas);
+      cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
+      cameratracker.init({ip: "localhost", port: 9001});
     }
-
-    function animate() {
-        dx = movementX - positionCursorX;
-        dy = movementY - positionCursorY;
-
-        positionCursorX += (dx / iterations);
-        positionCursorY += (dy / iterations);
-
-        context.clearRect(0, 0, canvas.width, canvas.height);
-
-        drawCircle(positionCursorX, positionCursorY);
-
-        requestAnimationFrame(animate);
-    }
-
-    function drawCircle(coordX, coordY) {
-        context.beginPath();
-        context.arc(coordX, coordY, 20, 0, 2 * Math.PI, true);
-        context.fillStyle = "green";
-        context.fill();
-        context.strokeStyle = '#003300';
-        context.stroke();
-    }
-
-    function toggleFeedbackPanel(flag) {
-        var $feedbackMovement = $(".feedback-movement");
-        if (flag) {
-            $feedbackMovement.fadeIn(300);
-        } else {
-            $feedbackMovement.fadeOut(300);
-        }
-    }
-  </script>
-
-  <script id="gestos">
-
-    $('.control').slick({
-         variableWidth: true,
-         infinite: true,
-         autoPlay:true,
-         slidesToShow: 1,
-     });
-
-    doConnection('localhost', 9001);
-
-    var $control = $('.control');
-
-    onLeft(function () {
-        $control.slick('slickNext');
-        document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
-    });
-
-    onRight(function () {
-        $control.slick('slickPrev');
-        document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
-    });
-
-    onTop(function () {
-        console.log("Movendo para o topo");
-        document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
-    });
-
-    onDown(function () {
-        console.log("Movendo para baixo");
-        document.write(`<audio controls><source src="sounds/cursor-move.mp3" type="audio/mpeg"></audio>`);
-    });
-
-    onPosition(function (position) {
-        if (position === null) {
-            toggleFeedbackPanel(false);
-            return;
-        }
-
-        toggleFeedbackPanel(true);
-        setCoordinates(position.x, position.y);
-        animate();
-    });
-
   </script>
 
 </body>

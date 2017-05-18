@@ -1,5 +1,9 @@
 @import url(http://fonts.googleapis.com/css?family=Varela+Round);
 
+audio{
+    display: none;
+} 
+
 .slides {
     padding: 0;
     width: 100%;

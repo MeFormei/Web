@@ -1,0 +1,52 @@
+#turma {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.slide-turmas {
+  position:absolute;
+  bottom:0;
+  opacity:0.9;
+  height:50px;
+  padding-top:10px;
+  background:#333;
+  z-index:0;
+}
+
+.slide-turmas.fechado {
+	height:50px;
+	transition: 0.5s;
+	-webkit-animation: slide 0.5s forwards;
+	z-index:0;
+}
+
+.slide-turmas.aberto {
+	height:160px;
+	transition: 0.5s;
+	-webkit-animation: slide 0.5s forwards;
+	z-index:0;
+}
+
+.cameraview-wrapper {
+	background-color: #333;
+	border: 1px solid white;
+	opacity: 0.6;
+	position: fixed;
+    top:10px;
+    left:10px;
+}
+
+.vignette {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 200px rgba(0,0,0,0.9) inset;
+}
+
+html {
+	font-family: 'Open Sans', sans-serif;
+}

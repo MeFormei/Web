@@ -1,10 +1,14 @@
 const TOPIC_DIRECTION = 'direction';
 const TOPIC_POSITION = 'position';
-
-var client;
 var callbacks = { 'direction':{'WEST':null,'EAST':null,'NORTH':null,'SOUTH':null}, 'position':null };
+var client = {};
+var cameratracker = cameratracker || {};
 
-function doConnection(ip, port){
+cameratracker.init = function(config){
+	cameratracker.doConnection(config.ip,config.port);
+}
+
+cameratracker.doConnection = function(ip, port){
 	client = mqtt.connect('mqtt://' + ip + ':' + port);
 
 	client.on('connect', function () {
@@ -34,22 +38,22 @@ function doConnection(ip, port){
 	});
 }
 
-function onLeft(callback){
+cameratracker.onLeft = function(callback){
 	callbacks[TOPIC_DIRECTION]['WEST'] = callback;
 }
 
-function onRight(callback){
+cameratracker.onRight = function(callback){
 	callbacks[TOPIC_DIRECTION]['EAST'] = callback;
 }
 
-function onTop(callback){
+cameratracker.onTop = function(callback){
 	callbacks[TOPIC_DIRECTION]['NORTH'] = callback;
 }
 
-function onDown(callback){
+cameratracker.onDown = function(callback){
 	callbacks[TOPIC_DIRECTION]['SOUTH'] = callback;
 }
 
-function onPosition(callback) {
+cameratracker.onPosition = function(callback) {
     callbacks[TOPIC_POSITION] = callback;
 }
