@@ -6,16 +6,33 @@ var navegacaoTemplate = Handlebars.compile(navegacaoMolde);
 var owl;
 slider.turmas = {};
 
+var turmaIndex = 0;
+
 slider.init = function(turmas){
   slider.carregarTurmas(turmas);
 }
 
-slider.changeCurrentImage = function(index) {
-  var i = index % slider.turmas.length;
-  var fotoTurmaUrl = slider.turmas[i].foto;
+slider.changeCurrentImage = function() {
+  var fotoTurmaUrl = slider.turmas[turmaIndex].foto;
   $turma = $('#turma');
   $turma.css("background", "url('" + fotoTurmaUrl + "') center fixed");
   $turma.css("background-size", "cover");
+}
+
+slider.nextItem = function() {
+  turmaIndex += 1;
+  if (turmaIndex == slider.turmas.length) {
+    turmaIndex = 0;  
+  }
+  slider.changeCurrentImage();
+}
+
+slider.previousItem = function() {
+  turmaIndex -= 1;
+  if (turmaIndex < 0) {
+    turmaIndex = slider.turmas.length - 1;
+  }
+  slider.changeCurrentImage();
 }
 
 slider.carregarTurmas = function(turmas){
@@ -41,11 +58,6 @@ slider.carregarTurmas = function(turmas){
         }
    });
 
-  owl.on('changed.owl.carousel', function(event) {
-    var turmaIndex = event.item.index - event.item.count - 1;
-    slider.changeCurrentImage(turmaIndex);
-  });
-
-  slider.changeCurrentImage(0);
+  slider.changeCurrentImage();
 }
 
