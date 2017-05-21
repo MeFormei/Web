@@ -1,15 +1,11 @@
 var slider = slider || {};
-
-var navegacaoDiv = $('#navegacao');
-var navegacaoMolde = $("#navegacao-molde").html();
-var navegacaoTemplate = Handlebars.compile(navegacaoMolde);
 var owl;
 slider.turmas = {};
 
 var turmaIndex = 0;
 
-slider.init = function(turmas){
-  slider.carregarTurmas(turmas);
+slider.init = function(turmas, inicializar){
+  slider.carregarTurmas(turmas, inicializar);
 }
 
 slider.changeCurrentImage = function() {
@@ -35,28 +31,32 @@ slider.previousItem = function() {
   slider.changeCurrentImage();
 }
 
-slider.carregarTurmas = function(turmas){
+slider.carregarTurmas = function(turmas,inicializar){
   slider.turmas = turmas;
-  var navegacaoHtml = navegacaoTemplate({'turmas': turmas});
-  navegacaoDiv.html(navegacaoHtml);
   owl = $('.owl-carousel');
+
+  if(inicializar == 'false' || inicializar === false){
+      console.log("delete ");
+      owl.trigger('destroy.owl.carousel');
+  }
+
   owl.owlCarousel({
-        loop:true,
-        margin:10,
-        nav:false,
-        dots:false,
-        responsive: {
-          600:{
-            items:4
+      loop: true,
+      margin: 10,
+      nav: false,
+      dots: false,
+      responsive: {
+          600: {
+              items: 4
           },
-          900:{
-            items:6
+          900: {
+              items: 6
           },
-          1200:{
-            items:7 
+          1200: {
+              items: 7
           }
-        }
-   });
+      }
+  });
 
   slider.changeCurrentImage();
 }
