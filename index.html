@@ -101,25 +101,19 @@
         data: {
             turmas: []
         },
-        watch: {
-            turmas: function(val){
-                alert({turmas: val});
-                setTimeout(function(){
-                    slider.init(val, false);
-                },1000);
-            }
+        updated: function(){
+          slider.init(this.turmas, true);
         }
     });
 
     var online = false;
     if(online){
         $.getJSON("http://meformei.ddns.net/turma")
-            .then(turmasCarregadas => {
-                principal.turmas = turmasCarregadas;
-                slider.init(turmasCarregadas);
+            .then(turmas => {
+                principal.turmas = turmas;
             })
             .done(() => {
-                    cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
+                cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
                 cameratracker.init({ip: "localhost", port: 9001});
             })
             .fail((error) => alert("Falha ao obter dados do servidor." + error));
@@ -132,8 +126,7 @@
             {id: 5, nome: "Turma Aligator", foto: "assets/t05.jpg"},
             {id: 6, nome: "Turma Head And Shoulders", foto: "assets/t03.jpg"}];
 
-        slider.init([{id:0,foto:""}], true);
-
+        slider.init();
         principal.turmas = mockTurmas;
         cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
         cameratracker.init({ip: "localhost", port: 9001});

@@ -4,15 +4,17 @@ slider.turmas = {};
 
 var turmaIndex = 0;
 
-slider.init = function(turmas, inicializar){
-  slider.carregarTurmas(turmas, inicializar);
+slider.init = function(turmas, resetar){
+  slider.carregarTurmas(turmas, resetar);
 }
 
 slider.changeCurrentImage = function() {
-  var fotoTurmaUrl = slider.turmas[turmaIndex].foto;
-  $turma = $('#turma');
-  $turma.css("background", "url('" + fotoTurmaUrl + "') center fixed");
-  $turma.css("background-size", "cover");
+  if(slider.turmas.length > 0){
+      var fotoTurmaUrl = slider.turmas[turmaIndex].foto;
+      $turma = $('#turma');
+      $turma.css("background", "url('" + fotoTurmaUrl + "') center fixed");
+      $turma.css("background-size", "cover");
+  }
 }
 
 slider.nextItem = function() {
@@ -31,13 +33,13 @@ slider.previousItem = function() {
   slider.changeCurrentImage();
 }
 
-slider.carregarTurmas = function(turmas,inicializar){
-  slider.turmas = turmas;
+slider.carregarTurmas = function(turmas, resetar){
+  slider.turmas = turmas || [];
   owl = $('.owl-carousel');
 
-  if(inicializar == 'false' || inicializar === false){
-      console.log("delete ");
+  if(resetar != undefined && (resetar == 'true' || resetar === true)){
       owl.trigger('destroy.owl.carousel');
+      owl.html(owl.find('.owl-stage-outer').html()).removeClass('owl-loaded');
   }
 
   owl.owlCarousel({
