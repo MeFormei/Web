@@ -27,7 +27,7 @@
   
     <div id="turma" class="section principal">
       <div class="vignette"></div>
-      <h2 style="text-align:right;font-weight:600;color:white;position:absolute;right:20px;bottom:165px;text-shadow: 2px 2px #000;">Turma NullPointerException</h2>
+      <!--<h2 style="text-align:right;font-weight:600;color:white;position:absolute;right:20px;bottom:165px;text-shadow: 2px 2px #000;">Turma NullPointerException</h2>-->
       <div id="navegacao">  <!-- gerado pelo navegacao-molde --> </div>
       <script id="navegacao-molde" type="text/x-handlebars-template">
         <div class="slide-turmas owl-carousel owl-theme">
@@ -39,11 +39,14 @@
     </div>
     
     <div id="turma-detalhes" class="section" style="z-index:2;">
-      <div style="float:left;height:100%;width:30%;background-color:#FFFFFF;">
-
+      <div style="padding-top:15%;float:left;height:100%;width:40%;background-color:#FFFFFF;">
+			<h2 id="nome_aluno" style="text-align:center;font-weight:400">Nome {{Aluno}}</h2>
+          	<h2 id="frase_aluno" style="text-align:center;font-weight:400">Frase {{Frase}}</h2>
+          	<h2 id="enfase_aluno" style="text-align:center;font-weight:400">Ênfase {{Enfase}}</h2>
+          	<h2 id="turma_aluno" style="text-align:center;font-weight:400">Turma {{Turma}}</h2>
       </div>
-      <div style="float:right;height:100%;width:70%;background-color:#F1F1F1;">
-          <h2 style="text-align:center;font-weight:300;">Turma {{NullPointerException}}</h2>
+      <div style="padding-top:20%;float:right;height:100%;width:60%;background-color:#F1F1F1;">
+          <h2 style="text-align:center;font-weight:300;">Foto {{Foto}}</h2>
       </div>
 
     </div>
@@ -63,11 +66,11 @@
 
       <div style="height:62%;width:100%;">
           
-          <h2 id="patrono" style="font-weight:400">Patrono {{Patrono}}</h2>
-          <h2 id="paraninfo" style="font-weight:400">Paraninfo {{Paraninfo}}</h2>
-          <h2 id="reitor" style="font-weight:400">Reitor {{Reitor}}</h2>
-          <h2 id="coordenador" style="font-weight:400">Coordenador {{Coordenador}}</h2>
-          <h2 id="viceCoordenador" style="font-weight:400">Vice Coordenador {{ViceCoordenador}}</h2>
+          <h2 id="patrono" style="text-align:center;font-weight:400">Patrono {{Patrono}}</h2>
+          <h2 id="paraninfo" style="text-align:center;font-weight:400">Paraninfo {{Paraninfo}}</h2>
+          <h2 id="reitor" style="text-align:center;font-weight:400">Reitor {{Reitor}}</h2>
+          <h2 id="coordenador" style="text-align:center;font-weight:400">Coordenador {{Coordenador}}</h2>
+          <h2 id="viceCoordenador" style="text-align:center;font-weight:400">Vice Coordenador {{ViceCoordenador}}</h2>
       </div>
 
       <div style="bottom:0px;height:10%;width:100%;">
