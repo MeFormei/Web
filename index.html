@@ -60,23 +60,26 @@
       </div>
 
 
-      <div style="height:10%;width:100%;">
-          <h1 id="nomeTurma" style="text-align:center;font-weight:700;">Turma {{NullPointerException}}</h1>
-      </div>
 
+      <div id="turma-homenageados"></div>
+      <script id="template-homenageados" type="text/x-handlebars-template">
+      <div style="height:10%;width:100%;">
+          <h1 id="nomeTurma" style="text-align:center;font-weight:700;">{{nome}}</h1>
+      </div>
       <div style="height:62%;width:100%;">
-          
-          <h2 id="patrono" style="text-align:center;font-weight:400">Patrono {{Patrono}}</h2>
-          <h2 id="paraninfo" style="text-align:center;font-weight:400">Paraninfo {{Paraninfo}}</h2>
-          <h2 id="reitor" style="text-align:center;font-weight:400">Reitor {{Reitor}}</h2>
-          <h2 id="coordenador" style="text-align:center;font-weight:400">Coordenador {{Coordenador}}</h2>
-          <h2 id="viceCoordenador" style="text-align:center;font-weight:400">Vice Coordenador {{ViceCoordenador}}</h2>
+              <h2 id="patrono" style="text-align:center;font-weight:400">Patrono <b>{{patrono}}</b></h2>
+              <h2 id="paraninfo" style="text-align:center;font-weight:400">Paraninfo <b>{{paraninfo}}</b></h2>
+              <h2 id="reitor" style="text-align:center;font-weight:400">Reitor <b>{{reitor}}</b></h2>
+              <h2 id="coordenador" style="text-align:center;font-weight:400">Coordenador <b>{{coordenador}}</b></h2>
+              <h2 id="viceCoordenador" style="text-align:center;font-weight:400">Vice Coordenador <b>{{vice_cordenador}}</b></h2>
+
       </div>
 
       <div style="bottom:0px;height:10%;width:100%;">
 
-          <h2 id="instituicao" style="text-align:center;font-weight:400">{{UFRN}}</h2>
+          <h2 id="instituicao" style="text-align:center;font-weight:400">{{instituicao}}</h2>
       </div>
+      </script>
 
 <!--
       <div style="float:left;height:100%;width:30%;background-color:#FFFFFF;">
@@ -118,7 +121,7 @@
   <!-- Inicialização da Página -->
   <script>
 
-    var online = false;
+    var online = true;
     if(online){
       $.getJSON("http://meformei.ddns.net/turma")
       .then(turmas => slider.init(turmas))
@@ -129,9 +132,9 @@
       .fail(() => alert("Falha ao obter dados do servidor."));
       
     } else {
-      var mockTurmas = [{id: 1, nome: "Turma NullPointer", foto: "assets/t01.jpg" },
-       {id: 2, nome: "Turma GarbageCollector", foto: "assets/t02.jpg"},
-       {id: 3, nome: "Turma OutOfBound", foto: "assets/t03.jpg"},
+      var mockTurmas = [{id: 1, nome: "Turma NullPointer",patrono:"O cara" ,foto: "assets/t01.jpg" },
+       {id: 2, nome: "Turma GarbageCollector",patrono:"O cara de pau" , foto: "assets/t02.jpg"},
+       {id: 3, nome: "Turma OutOfBound",patrono:"O cara lisa" , foto: "assets/t03.jpg"},
        {id: 4, nome: "Turma James Bond", foto: "assets/t04.jpg"},
        {id: 5, nome: "Turma Aligator", foto: "assets/t05.jpg"},
        {id: 6, nome: "Turma Head And Shoulders", foto: "assets/t03.jpg"}];
