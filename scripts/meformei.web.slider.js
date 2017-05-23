@@ -3,6 +3,11 @@ var slider = slider || {};
 var navegacaoDiv = $('#navegacao');
 var navegacaoMolde = $("#navegacao-molde").html();
 var navegacaoTemplate = Handlebars.compile(navegacaoMolde);
+
+var homenageadosDiv = $('#turma-homenageados');
+var homenageadosMolde   = $("#template-homenageados").html();
+var homenageadosTemplate = Handlebars.compile(homenageadosMolde);
+ 
 var owl;
 slider.turmas = {};
 
@@ -14,6 +19,9 @@ slider.init = function(turmas){
 
 slider.changeCurrentImage = function() {
   var fotoTurmaUrl = slider.turmas[turmaIndex].foto;
+  var turma = slider.turmas[turmaIndex];
+  var homenageadosHtml    = homenageadosTemplate(turma);
+  homenageadosDiv.html(homenageadosHtml);
   $turma = $('#turma');
   $turma.css("background", "url('" + fotoTurmaUrl + "') center fixed");
   $turma.css("background-size", "cover");
