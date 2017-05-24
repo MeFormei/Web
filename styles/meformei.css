@@ -84,6 +84,10 @@
   box-shadow: 0 0 200px rgba(0,0,0,0.9) inset;
 }
 
+audio{
+    display: none;
+}
+
 html {
 	font-family: 'Open Sans', sans-serif;
 }
