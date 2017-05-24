@@ -39,13 +39,13 @@
     </div>
     
     <div id="turma-detalhes" class="section" style="z-index:2;">
-      <div style="padding-top:15%;float:left;height:100%;width:40%;background-color:#FFFFFF;">
-			<h2 id="nome_aluno" style="text-align:center;font-weight:400">Nome {{Aluno}}</h2>
-          	<h2 id="frase_aluno" style="text-align:center;font-weight:400">Frase {{Frase}}</h2>
-          	<h2 id="enfase_aluno" style="text-align:center;font-weight:400">Ênfase {{Enfase}}</h2>
-          	<h2 id="turma_aluno" style="text-align:center;font-weight:400">Turma {{Turma}}</h2>
+      <div id="detalhes-div-aluno">
+			<h2 id="detalhes-turma">Nome {{Aluno}}</h2>
+          	<h2 id="detalhes-turma">Frase {{Frase}}</h2>
+          	<h2 id="detalhes-turma">Ênfase {{Enfase}}</h2>
+          	<h2 id="detalhes-turma">Turma {{Turma}}</h2>
       </div>
-      <div style="padding-top:20%;float:right;height:100%;width:60%;background-color:#F1F1F1;">
+      <div id="detalhes-div-foto">
           <h2 style="text-align:center;font-weight:300;">Foto {{Foto}}</h2>
       </div>
 
@@ -53,7 +53,9 @@
 
     <div id="homenageados" class="section">
       
-      <img id="imagem" src="assets/t01.jpg">
+      <div id="turma-homenageados"></div>
+      <script id="template-homenageados" type="text/x-handlebars-template">
+      <img id="imagem" src="{{foto}}">
       
       <div style="height:8%;width:100%;">
         
@@ -61,35 +63,23 @@
 
 
 
-      <div id="turma-homenageados"></div>
-      <script id="template-homenageados" type="text/x-handlebars-template">
       <div style="height:10%;width:100%;">
-          <h1 id="nomeTurma" style="text-align:center;font-weight:700;">{{nome}}</h1>
+          <h1 id="nomeTurma">{{nome}}</h1>
       </div>
       <div style="height:62%;width:100%;">
-              <h2 id="patrono" style="text-align:center;font-weight:400">Patrono <b>{{patrono}}</b></h2>
-              <h2 id="paraninfo" style="text-align:center;font-weight:400">Paraninfo <b>{{paraninfo}}</b></h2>
-              <h2 id="reitor" style="text-align:center;font-weight:400">Reitor <b>{{reitor}}</b></h2>
-              <h2 id="coordenador" style="text-align:center;font-weight:400">Coordenador <b>{{coordenador}}</b></h2>
-              <h2 id="viceCoordenador" style="text-align:center;font-weight:400">Vice Coordenador <b>{{vice_cordenador}}</b></h2>
+              <h2 id="detalhes-turma">Patrono <b>{{patrono}}</b></h2>
+              <h2 id="detalhes-turma">Paraninfo <b>{{paraninfo}}</b></h2>
+              <h2 id="detalhes-turma">Reitor <b>{{reitor}}</b></h2>
+              <h2 id="detalhes-turma">Coordenador <b>{{coordenador}}</b></h2>
+              <h2 id="detalhes-turma">Vice Coordenador <b>{{vice_cordenador}}</b></h2>
 
       </div>
 
       <div style="bottom:0px;height:10%;width:100%;">
 
-          <h2 id="instituicao" style="text-align:center;font-weight:400">{{instituicao}}</h2>
+          <h2 id="detalhes-turma">{{instituicao}}</h2>
       </div>
-      </script>
-
-<!--
-      <div style="float:left;height:100%;width:30%;background-color:#FFFFFF;">
-
-        <img id="imagem" src="assets/t01.jpg">
-
-      </div>
--->
-
-      
+      </script>      
 
     </div>
 

@@ -5,6 +5,32 @@
   background-size: cover;
 }
 
+#detalhes-turma{
+  text-align: center;
+  font-weight: 400;
+}
+
+#detalhes-div-foto{
+  padding-top:20%;
+  float:right;
+  height:100%;
+  width:60%;
+  background-color:#F1F1F1;
+}
+
+#detalhes-div-aluno{
+  padding-top:15%;
+  float:left;
+  height:100%;
+  width:40%;
+  background-color:#FFFFFF;
+}
+
+#nomeTurma{
+  text-align: center;
+  font-weight: 700;
+}
+
 #imagem{
   opacity: 0.2;
   width: 100%;
