@@ -67,6 +67,7 @@
         </div>
 
     </div>
+    
 
 
 </div>
@@ -126,8 +127,8 @@
             {id: 5, nome: "Turma Aligator", foto: "assets/t05.jpg"},
             {id: 6, nome: "Turma Head And Shoulders", foto: "assets/t03.jpg"}];
 
-        slider.init();
         principal.turmas = mockTurmas;
+        // slider.init();
         cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
         cameratracker.init({ip: "localhost", port: 9001});
     }
