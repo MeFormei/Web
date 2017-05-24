@@ -40,6 +40,7 @@ slider.carregarTurmas = function(turmas, resetar){
   if(resetar != undefined && (resetar == 'true' || resetar === true)){
       owl.trigger('destroy.owl.carousel');
       owl.html(owl.find('.owl-stage-outer').html()).removeClass('owl-loaded');
+      turmaIndex = 0;
   }
 
   owl.owlCarousel({
