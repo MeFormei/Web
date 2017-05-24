@@ -1,7 +1,7 @@
 var slider = slider || {};
 var owl;
 slider.turmas = {};
-
+slider.turma = {};
 var turmaIndex = 0;
 
 slider.init = function(turmas, resetar){
@@ -10,11 +10,22 @@ slider.init = function(turmas, resetar){
 
 slider.changeCurrentImage = function() {
   if(slider.turmas.length > 0){
-      var fotoTurmaUrl = slider.turmas[turmaIndex].foto;
+      slider.turma = slider.turmas[turmaIndex];
+      turmaDetalhes.turma = slider.turmas[turmaIndex];
+      var fotoTurmaUrl = slider.turma.foto;
       $turma = $('#turma');
       $turma.css("background", "url('" + fotoTurmaUrl + "') center fixed");
       $turma.css("background-size", "cover");
   }
+}
+
+slider.changeCurrentMusic = function(){
+    var musicaTurmaUrl = slider.turmas[turmaIndex].musica;
+    var musicaTag = $("musica");
+    var sourceMusica = $("sourceMusica");
+    sourceMusica.src = "sounds/musics/" + musicaTurmaUrl;
+    musica.load();
+    musica.play();
 }
 
 slider.nextItem = function() {
@@ -23,6 +34,7 @@ slider.nextItem = function() {
     turmaIndex = 0;  
   }
   slider.changeCurrentImage();
+  slider.changeCurrentMusic();
 }
 
 slider.previousItem = function() {
