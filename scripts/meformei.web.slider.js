@@ -27,12 +27,23 @@ slider.changeCurrentImage = function() {
   $turma.css("background-size", "cover");
 }
 
+slider.changeCurrentMusic = function()
+{
+    var musicaTurmaUrl = slider.turmas[turmaIndex].musica;
+    var musicaTag = $("musica");
+    var sourceMusica = $("sourceMusica");
+    sourceMusica.src = "sounds/musics/" + musicaTurmaUrl;
+    musica.load();
+    musica.play();
+}
+
 slider.nextItem = function() {
   turmaIndex += 1;
   if (turmaIndex == slider.turmas.length) {
     turmaIndex = 0;  
   }
   slider.changeCurrentImage();
+  slider.changeCurrentMusic();
 }
 
 slider.previousItem = function() {

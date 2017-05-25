@@ -22,6 +22,9 @@
   <audio id="moveScreenVertical" preload="auto" autoplay="false">
     <source id="sourceMoveScreenVertical" src="sounds/effects/selection.mp3"></source>
 	</audio>
+    <audio id="musica" preload="auto" autoplay="true">
+    <source id="sourceMusica"></source>
+	</audio>
 
   <div id="fullpage">
   
@@ -38,58 +41,57 @@
       </script>
     </div>
     
-    <div id="turma-detalhes" class="section" style="z-index:2;">
-      <div style="padding-top:15%;float:left;height:100%;width:40%;background-color:#FFFFFF;">
-			<h2 id="nome_aluno" style="text-align:center;font-weight:400">Nome {{Aluno}}</h2>
-          	<h2 id="frase_aluno" style="text-align:center;font-weight:400">Frase {{Frase}}</h2>
-          	<h2 id="enfase_aluno" style="text-align:center;font-weight:400">Ênfase {{Enfase}}</h2>
-          	<h2 id="turma_aluno" style="text-align:center;font-weight:400">Turma {{Turma}}</h2>
-      </div>
-      <div style="padding-top:20%;float:right;height:100%;width:60%;background-color:#F1F1F1;">
-          <h2 style="text-align:center;font-weight:300;">Foto {{Foto}}</h2>
-      </div>
+    <div id="turma-detalhes" class="section" style="z-index:2;"> 
+      <div id="detalhes-aluno"></div>
+      <script id="aluno-molde" type="text/x-handlebars-template">
+        <div style="float:left;height:100%;width:40%;background-color:#FFFFFF;">
+              <h2 id="detalhes-turma">Nome <b>{{nome}}</b></h2>
+              <h2 id="detalhes-turma">Frase <b>{{frase}}</b></h2>
+              <h2 id="detalhes-turma">Ênfase <b>{{enfase}}</b></h2>
+        </div>
+        <div id="foto-aluno" style="padding-top:20%;float:right;height:100%;width:60%;;background: url({{foto}});">
 
-    </div>
+            
+        </div>
+      </script>   
+      <div id="carrossel-alunos"></div>
+      <script id="carrossel-molde" type="text/x-handlebars-template">
+        <div class="slide-alunos owl-carousel owl-theme" style="position:absolute;bottom:0;">
+              {{#each alunos}}
+                <img src="{{foto}}" class="item" style="height:150px; box-shadow: 0 0 200px rgba(0,0,0,0.9) inset;"/>
+              {{/each}}
+
+        </div>    
+      </script>
+      </div>
+    
 
     <div id="homenageados" class="section">
       
-      <img id="imagem" src="assets/t01.jpg">
-      
-      <div style="height:8%;width:100%;">
-        
-      </div>
-
-
-
       <div id="turma-homenageados"></div>
       <script id="template-homenageados" type="text/x-handlebars-template">
-      <div style="height:10%;width:100%;">
-          <h1 id="nomeTurma" style="text-align:center;font-weight:700;">{{nome}}</h1>
-      </div>
-      <div style="height:62%;width:100%;">
-              <h2 id="patrono" style="text-align:center;font-weight:400">Patrono <b>{{patrono}}</b></h2>
-              <h2 id="paraninfo" style="text-align:center;font-weight:400">Paraninfo <b>{{paraninfo}}</b></h2>
-              <h2 id="reitor" style="text-align:center;font-weight:400">Reitor <b>{{reitor}}</b></h2>
-              <h2 id="coordenador" style="text-align:center;font-weight:400">Coordenador <b>{{coordenador}}</b></h2>
-              <h2 id="viceCoordenador" style="text-align:center;font-weight:400">Vice Coordenador <b>{{vice_cordenador}}</b></h2>
+        <img id="imagem" src="{{foto}}">
+        
+        <div style="height:8%;width:100%;">
+          
+        </div>
+        <div style="height:10%;width:100%;">
+            <h1 id="nomeTurma">{{nome}}</h1>
+        </div>
+        <div style="height:62%;width:100%;">
+                <h2 id="detalhes-turma">Patrono <b>{{patrono}}</b></h2>
+                <h2 id="detalhes-turma">Paraninfo <b>{{paraninfo}}</b></h2>
+                <h2 id="detalhes-turma">Reitor <b>{{reitor}}</b></h2>
+                <h2 id="detalhes-turma">Coordenador <b>{{coordenador}}</b></h2>
+                <h2 id="detalhes-turma">Vice Coordenador <b>{{vice_cordenador}}</b></h2>
 
-      </div>
+        </div>
 
-      <div style="bottom:0px;height:10%;width:100%;">
+        <div style="bottom:0px;height:10%;width:100%;">
 
-          <h2 id="instituicao" style="text-align:center;font-weight:400">{{instituicao}}</h2>
-      </div>
-      </script>
-
-<!--
-      <div style="float:left;height:100%;width:30%;background-color:#FFFFFF;">
-
-        <img id="imagem" src="assets/t01.jpg">
-
-      </div>
--->
-
-      
+            <h2 id="detalhes-turma">{{instituicao}}</h2>
+        </div>
+      </script>      
 
     </div>
 
@@ -114,6 +116,7 @@
 
   <!-- MeFormei Web -->
   <script src="scripts/meformei.web.slider.js"></script>
+  <script src="scripts/meformei.web.slider-alunos.js"></script>
   <script src="scripts/meformei.web.fullpage.js"></script>
   <script src="scripts/meformei.web.camera.view.js"></script>
   <script src="scripts/meformei.web.camera.tracker.js"></script>
@@ -121,7 +124,7 @@
   <!-- Inicialização da Página -->
   <script>
 
-    var online = true;
+    var online = false;
     if(online){
       $.getJSON("http://meformei.ddns.net/turma")
       .then(turmas => slider.init(turmas))
@@ -139,7 +142,14 @@
        {id: 5, nome: "Turma Aligator", foto: "assets/t05.jpg"},
        {id: 6, nome: "Turma Head And Shoulders", foto: "assets/t03.jpg"}];
 
-      slider.init(mockTurmas);
+        var mockAlunos = [
+       {id: 1, nome: "James Franco",frase:"O cara" ,enfase: "Jogos", foto: "assets/a01.jpg",id_turma:1 },
+       {id: 1, nome: "Felipe Franco",frase:"Game Over" ,enfase: "Eng Software", foto: "assets/a02.jpg",id_turma:1 },
+       {id: 1, nome: "Moises Franco",frase:"Eureca boy!" ,enfase: "bio Tecnologia", foto: "assets/a04.jpg",id_turma:1 }
+       ];
+
+      slider.init(mockTurmas);  
+      slideralunos.init(mockAlunos);
       cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
       cameratracker.init({ip: "localhost", port: 9001});
     }
