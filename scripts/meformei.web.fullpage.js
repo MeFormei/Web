@@ -4,9 +4,11 @@
       	onLeave: function(index, nextIndex, direction){
       		if (index == '1'){
       			$('.slide-turmas').addClass('aberto');
+            isGiraTurma = false;
       		} else {
-				$('.slide-turmas').removeClass('aberto');
+				    $('.slide-turmas').removeClass('aberto');
+            isGiraTurma = true;
       		}
       	},
-  });
+  });  
 });

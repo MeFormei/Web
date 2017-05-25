@@ -38,7 +38,9 @@ cameratracker.onLeft(function () {
     execOpenedSlider(function() {
         owl.trigger('prev.owl.carousel');
         updateSoundHorizontal();
-        slider.previousItem();
+        if(isGiraTurma)
+            slider.previousItem();
+        slideralunos.previousItem();
     });
 });
 
@@ -46,7 +48,10 @@ cameratracker.onRight(function () {
     execOpenedSlider(function() {
         owl.trigger('next.owl.carousel');
         updateSoundHorizontal();
-        slider.nextItem();
+        if(isGiraTurma)
+            slider.nextItem();
+        slideralunos.nextItem();
+        
     });
 });
 

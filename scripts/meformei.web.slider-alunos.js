@@ -22,10 +22,6 @@ slideralunos.changeCurrentImage = function() {
   var alunoHtml    = detalhesTemplate(aluno);
   detalhesDiv.html(alunoHtml);
 
-  /*var fotoAlunoUrl = aluno.foto;
-  $aluno = $('#aluno');
-  $aluno.css("background", "url('" + fotoAlunoUrl + "') center fixed");
-  $aluno.css("background-size", "cover");*/
 }
 
 slideralunos.nextItem = function() {
