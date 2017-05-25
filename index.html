@@ -73,7 +73,7 @@
               <h2 id="detalhes-turma">Paraninfo <b>{{paraninfo}}</b></h2>
               <h2 id="detalhes-turma">Reitor <b>{{reitor}}</b></h2>
               <h2 id="detalhes-turma">Coordenador <b>{{coordenador}}</b></h2>
-              <h2 id="detalhes-turma">Vice Coordenador <b>{{vice_cordenador}}</b></h2>
+              <h2 id="detalhes-turma">Vice Coordenador <b>{{vice_coordenador}}</b></h2>
 
       </div>
 
@@ -115,7 +115,7 @@
 
     var online = true;
     if(online){
-      $.getJSON("http://meformei.ddns.net/turma")
+      $.getJSON("http://meformei.ddns.net/turma/api/v1/turmas")
       .then(turmas => slider.init(turmas))
       .done(() => {
         cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
