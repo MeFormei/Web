@@ -41,23 +41,30 @@
       </script>
     </div>
     
-    <div id="turma-detalhes" class="section" style="z-index:2;">
-      <div id="detalhes-div-aluno">
-			<h2 id="detalhes-turma">Nome {{Aluno}}</h2>
-          	<h2 id="detalhes-turma">Frase {{Frase}}</h2>
-          	<h2 id="detalhes-turma">Ênfase {{Enfase}}</h2>
-          	<h2 id="detalhes-turma">Turma {{Turma}}</h2>
+    <div id="turma-detalhes" class="section" style="z-index:2;"> 
+      <div id="detalhes-aluno"></div>
+      <script id="aluno-molde" type="text/x-handlebars-template">
+        <div style="float:left;height:100%;width:40%;background-color:#FFFFFF;">
+              <h2 id="detalhes-turma">Nome <b>{{nome}}</b></h2>
+              <h2 id="detalhes-turma">Frase <b>{{frase}}</b></h2>
+              <h2 id="detalhes-turma">Ênfase <b>{{enfase}}</b></h2>
+        </div>
+        <div id="foto-aluno" style="padding-top:20%;float:right;height:100%;width:60%;;background: url({{foto}});">
+
+            
+        </div>
+      </script>   
+      <div id="carrossel-alunos"></div>
+      <script id="carrossel-molde" type="text/x-handlebars-template">
+        <div class="slide-alunos owl-carousel owl-theme" style="position:absolute;bottom:0;">
+              {{#each alunos}}
+                <img src="{{foto}}" class="item" style="height:150px; box-shadow: 0 0 200px rgba(0,0,0,0.9) inset;"/>
+              {{/each}}
+
+        </div>    
+      </script>
       </div>
-      <div id="detalhes-div-foto">
-          <h2 style="text-align:center;font-weight:300;">Foto {{Foto}}</h2>
-      </div>
-      <div class="owl-carousel owl-theme" style="position:absolute;bottom:0;">
-                <img src="assets/a01.jpg" class="item" style="height:150px; box-shadow: 0 0 200px rgba(0,0,0,0.9) inset;"/>
-                <img src="assets/a02.jpg" class="item" style="height:150px; box-shadow: 0 0 200px rgba(0,0,0,0.9) inset;"/>
-                <img src="assets/a03.jpg" class="item" style="height:150px; box-shadow: 0 0 200px rgba(0,0,0,0.9) inset;"/>
-                <img src="assets/a04.jpg" class="item" style="height:150px; box-shadow: 0 0 200px rgba(0,0,0,0.9) inset;"/>
-           </div>
-    </div>
+    
 
     <div id="homenageados" class="section">
       
@@ -109,6 +116,7 @@
 
   <!-- MeFormei Web -->
   <script src="scripts/meformei.web.slider.js"></script>
+  <script src="scripts/meformei.web.slider-alunos.js"></script>
   <script src="scripts/meformei.web.fullpage.js"></script>
   <script src="scripts/meformei.web.camera.view.js"></script>
   <script src="scripts/meformei.web.camera.tracker.js"></script>
@@ -134,7 +142,14 @@
        {id: 5, nome: "Turma Aligator", foto: "assets/t05.jpg"},
        {id: 6, nome: "Turma Head And Shoulders", foto: "assets/t03.jpg"}];
 
-      slider.init(mockTurmas);
+        var mockAlunos = [
+       {id: 1, nome: "James Franco",frase:"O cara" ,enfase: "Jogos", foto: "assets/a01.jpg",id_turma:1 },
+       {id: 1, nome: "Felipe Franco",frase:"Game Over" ,enfase: "Eng Software", foto: "assets/a02.jpg",id_turma:1 },
+       {id: 1, nome: "Moises Franco",frase:"Eureca boy!" ,enfase: "bio Tecnologia", foto: "assets/a04.jpg",id_turma:1 }
+       ];
+
+      slider.init(mockTurmas);  
+      slideralunos.init(mockAlunos);
       cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
       cameratracker.init({ip: "localhost", port: 9001});
     }
