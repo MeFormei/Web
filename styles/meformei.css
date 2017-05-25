@@ -14,7 +14,7 @@
   padding-top:20%;
   float:right;
   height:100%;
-  width:60%;
+  width:100%;
   background-color:#F1F1F1;
 }
 
@@ -53,24 +53,24 @@
 }
 
 .slide-turmas.fechado {
-	height:50px;
-	transition: 0.5s;
-	-webkit-animation: slide 0.5s forwards;
-	z-index:0;
+  height:50px;
+  transition: 0.5s;
+  -webkit-animation: slide 0.5s forwards;
+  z-index:0;
 }
 
 .slide-turmas.aberto {
-	height:160px;
-	transition: 0.5s;
-	-webkit-animation: slide 0.5s forwards;
-	z-index:0;
+  height:160px;
+  transition: 0.5s;
+  -webkit-animation: slide 0.5s forwards;
+  z-index:0;
 }
 
 .cameraview-wrapper {
-	background-color: #333;
-	border: 1px solid white;
-	opacity: 0.6;
-	position: fixed;
+  background-color: #333;
+  border: 1px solid white;
+  opacity: 0.6;
+  position: fixed;
     top:10px;
     left:10px;
 }
@@ -89,5 +89,5 @@ audio{
 }
 
 html {
-	font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
