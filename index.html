@@ -51,37 +51,39 @@
       <div id="detalhes-div-foto">
           <h2 style="text-align:center;font-weight:300;">Foto {{Foto}}</h2>
       </div>
-
+      <div class="owl-carousel owl-theme" style="position:absolute;bottom:0;">
+                <img src="assets/a01.jpg" class="item" style="height:150px; box-shadow: 0 0 200px rgba(0,0,0,0.9) inset;"/>
+                <img src="assets/a02.jpg" class="item" style="height:150px; box-shadow: 0 0 200px rgba(0,0,0,0.9) inset;"/>
+                <img src="assets/a03.jpg" class="item" style="height:150px; box-shadow: 0 0 200px rgba(0,0,0,0.9) inset;"/>
+                <img src="assets/a04.jpg" class="item" style="height:150px; box-shadow: 0 0 200px rgba(0,0,0,0.9) inset;"/>
+           </div>
     </div>
 
     <div id="homenageados" class="section">
       
       <div id="turma-homenageados"></div>
       <script id="template-homenageados" type="text/x-handlebars-template">
-      <img id="imagem" src="{{foto}}">
-      
-      <div style="height:8%;width:100%;">
+        <img id="imagem" src="{{foto}}">
         
-      </div>
+        <div style="height:8%;width:100%;">
+          
+        </div>
+        <div style="height:10%;width:100%;">
+            <h1 id="nomeTurma">{{nome}}</h1>
+        </div>
+        <div style="height:62%;width:100%;">
+                <h2 id="detalhes-turma">Patrono <b>{{patrono}}</b></h2>
+                <h2 id="detalhes-turma">Paraninfo <b>{{paraninfo}}</b></h2>
+                <h2 id="detalhes-turma">Reitor <b>{{reitor}}</b></h2>
+                <h2 id="detalhes-turma">Coordenador <b>{{coordenador}}</b></h2>
+                <h2 id="detalhes-turma">Vice Coordenador <b>{{vice_cordenador}}</b></h2>
 
+        </div>
 
+        <div style="bottom:0px;height:10%;width:100%;">
 
-      <div style="height:10%;width:100%;">
-          <h1 id="nomeTurma">{{nome}}</h1>
-      </div>
-      <div style="height:62%;width:100%;">
-              <h2 id="detalhes-turma">Patrono <b>{{patrono}}</b></h2>
-              <h2 id="detalhes-turma">Paraninfo <b>{{paraninfo}}</b></h2>
-              <h2 id="detalhes-turma">Reitor <b>{{reitor}}</b></h2>
-              <h2 id="detalhes-turma">Coordenador <b>{{coordenador}}</b></h2>
-              <h2 id="detalhes-turma">Vice Coordenador <b>{{vice_cordenador}}</b></h2>
-
-      </div>
-
-      <div style="bottom:0px;height:10%;width:100%;">
-
-          <h2 id="detalhes-turma">{{instituicao}}</h2>
-      </div>
+            <h2 id="detalhes-turma">{{instituicao}}</h2>
+        </div>
       </script>      
 
     </div>
@@ -114,7 +116,7 @@
   <!-- Inicialização da Página -->
   <script>
 
-    var online = true;
+    var online = false;
     if(online){
       $.getJSON("http://meformei.ddns.net/turma")
       .then(turmas => slider.init(turmas))
