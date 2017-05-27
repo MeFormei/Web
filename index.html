@@ -42,18 +42,16 @@
       </script>
     </div>
     
-    <div id="turma-detalhes" class="section" style="z-index:2;"> 
+    <div id="turma-detalhes" class="section" style="z-index:2;">
+      
       <div id="detalhes-aluno"></div>
       <script id="aluno-molde" type="text/x-handlebars-template">
-        <div style="float:left;height:100%;width:40%;background-color:#FFFFFF;">
+        <div style="float:left;height:100%;width:40%;">
               <h2 id="detalhes-turma">Nome <b>{{nome}}</b></h2>
               <h2 id="detalhes-turma">Frase <b>{{frase}}</b></h2>
               <h2 id="detalhes-turma">Ênfase <b>{{enfase}}</b></h2>
         </div>
-        <div id="foto-aluno" style="padding-top:20%;float:right;height:100%;width:60%;;background: url({{foto}});">
-
-            
-        </div>
+        <div id="foto-aluno" style="padding-top:20%;float:right;height:100%;width:60%;background: url({{foto}});background-repeat:no-repeat; background-position:top;"></div>
       </script>   
       <div id="carrossel-alunos"></div>
       <script id="carrossel-molde" type="text/x-handlebars-template">
