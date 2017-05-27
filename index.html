@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,7 +42,7 @@
       </script>
     </div>
     
-    <div id="turma-detalhes" class="section" style="z-index:2;" id="2"> 
+    <div id="turma-detalhes" class="section" style="z-index:2;"> 
       <div id="detalhes-aluno"></div>
       <script id="aluno-molde" type="text/x-handlebars-template">
         <div style="float:left;height:100%;width:40%;background-color:#FFFFFF;">
@@ -124,17 +125,23 @@
   <!-- Inicialização da Página -->
   <script>
 
-    var online = false;
-    var isGiraTurma = true;
+    var online = true;
     if(online){
-      $.getJSON("http://meformei.ddns.net/turma")
+      $.getJSON("http://meformei.ddns.net/turma/api/v1/turmas")
       .then(turmas => slider.init(turmas))
       .done(() => {
         cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
         cameratracker.init({ip: "localhost", port: 9001});
       })
       .fail(() => alert("Falha ao obter dados do servidor."));
-      
+	  
+	  $.getJSON("http://meformei.ddns.net/aluno/")
+      .then(alunos => slideralunos.init(alunos))
+      .done(() => {
+        cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
+        cameratracker.init({ip: "localhost", port: 9001});
+      })
+      .fail(() => alert("Falha ao obter dados dos alunos do servidor."));
     } else {
       var mockTurmas = [{id: 1, nome: "Turma NullPointer",patrono:"O cara" ,foto: "assets/t01.jpg" },
        {id: 2, nome: "Turma GarbageCollector",patrono:"O cara de pau" , foto: "assets/t02.jpg"},
