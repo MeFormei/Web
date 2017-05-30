@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,7 @@
   <link rel="stylesheet" href="vendor/owl.carousel.min.css"/>
   <link rel="stylesheet" href="vendor/owl.theme.default.min.css"/>  
   <link rel="stylesheet" href="styles/meformei.css"/>  
-  <link rel="shortcut icon" type="image/png" href="images/cap.png"/>
+  <link rel="shortcut icon" type="image/png" href="assets/cap.png"/>
   <link rel="vendor/animate.css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 </head>
@@ -18,13 +19,13 @@
   
   <audio id="moveScreenHorizontal" preload="auto" autoplay="false">
     <source id="sourceMoveScreenHorizontal" src="sounds/effects/cursor-move.mp3"></source>
-	</audio>
+  </audio>
   <audio id="moveScreenVertical" preload="auto" autoplay="false">
     <source id="sourceMoveScreenVertical" src="sounds/effects/selection.mp3"></source>
-	</audio>
+  </audio>
     <audio id="musica" preload="auto" autoplay="true">
     <source id="sourceMusica"></source>
-	</audio>
+  </audio>
 
   <div id="fullpage">
   
@@ -41,18 +42,23 @@
       </script>
     </div>
     
-    <div id="turma-detalhes" class="section" style="z-index:2;"> 
-      <div id="detalhes-aluno"></div>
+    <div id="turma-detalhes" class="section" style="z-index:2;">
+      
+      <div id="detalhes-aluno" style="height: 100%"></div>
       <script id="aluno-molde" type="text/x-handlebars-template">
-        <div style="float:left;height:100%;width:40%;background-color:#FFFFFF;">
+        <table style="border-style: solid;width: 100%;height: 100% ">
+        <tr>
+        <td style="float:left;height:100%;width:100%;background-color: #E6E6FA;align-content: center; ">
+              <br><br><br><br>
+              
               <h2 id="detalhes-turma">Nome <b>{{nome}}</b></h2>
               <h2 id="detalhes-turma">Frase <b>{{frase}}</b></h2>
               <h2 id="detalhes-turma">Ênfase <b>{{enfase}}</b></h2>
-        </div>
-        <div id="foto-aluno" style="padding-top:20%;float:right;height:100%;width:60%;;background: url({{foto}});">
-
-            
-        </div>
+        </td>
+        <td id="foto-aluno" style="height:100%;width:60%;background: url({{foto}});background-repeat:no-repeat; background-size:contain; ">
+        </td>
+        </tr>
+        </table>
       </script>   
       <div id="carrossel-alunos"></div>
       <script id="carrossel-molde" type="text/x-handlebars-template">
@@ -124,16 +130,23 @@
   <!-- Inicialização da Página -->
   <script>
 
-    var online = false;
+    var online = true;
     if(online){
-      $.getJSON("http://meformei.ddns.net/turma")
+      $.getJSON("http://meformei.ddns.net/turma/api/v1/turmas")
       .then(turmas => slider.init(turmas))
       .done(() => {
         cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
         cameratracker.init({ip: "localhost", port: 9001});
       })
       .fail(() => alert("Falha ao obter dados do servidor."));
-      
+    
+    $.getJSON("http://meformei.ddns.net/aluno/api/v1/turmas/1/alunos")
+      .then(alunos => slideralunos.init(alunos))
+      .done(() => {
+        cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
+        cameratracker.init({ip: "localhost", port: 9001});
+      })
+      .fail(() => alert("Falha ao obter dados dos alunos do servidor."));
     } else {
       var mockTurmas = [{id: 1, nome: "Turma NullPointer",patrono:"O cara" ,foto: "assets/t01.jpg" },
        {id: 2, nome: "Turma GarbageCollector",patrono:"O cara de pau" , foto: "assets/t02.jpg"},
