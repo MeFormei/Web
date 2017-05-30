@@ -19,12 +19,23 @@ slider.init = function(turmas){
 
 slider.changeCurrentImage = function() {
   var fotoTurmaUrl = slider.turmas[turmaIndex].foto;
-  var turma = slider.turmas[turmaIndex];
-  var homenageadosHtml    = homenageadosTemplate(turma);
-  homenageadosDiv.html(homenageadosHtml);
   $turma = $('#turma');
   $turma.css("background", "url('" + fotoTurmaUrl + "') center fixed");
   $turma.css("background-size", "cover");
+}
+
+slider.changeTurma = function() {
+  var turma = slider.turmas[turmaIndex];
+  var homenageadosHtml    = homenageadosTemplate(turma);
+  homenageadosDiv.html(homenageadosHtml);
+  $.getJSON("http://meformei.ddns.net/aluno/api/v1/turmas/"+turma.id+"/alunos")
+      .then(alunos => slideralunos.init(alunos))
+      .done(() => {
+        cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
+        cameratracker.init({ip: "localhost", port: 9001});
+      })
+      .fail(() => alert("Falha ao obter dados dos alunos do servidor."));
+
 }
 
 slider.changeCurrentMusic = function()
@@ -44,6 +55,7 @@ slider.nextItem = function() {
   }
   slider.changeCurrentImage();
   slider.changeCurrentMusic();
+  slider.changeTurma();
 }
 
 slider.previousItem = function() {
@@ -52,6 +64,7 @@ slider.previousItem = function() {
     turmaIndex = slider.turmas.length - 1;
   }
   slider.changeCurrentImage();
+  slider.changeTurma();
 }
 
 slider.carregarTurmas = function(turmas){
