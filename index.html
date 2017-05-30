@@ -44,6 +44,7 @@
     
     <div id="turma-detalhes" class="section" style="z-index:2;">
       
+<<<<<<< HEAD
       <div id="detalhes-aluno" style="height: 100%"></div>
       <script id="aluno-molde" type="text/x-handlebars-template">
         <table style="border-style: solid;width: 100%;height: 100% ">
@@ -59,6 +60,16 @@
         </td>
         </tr>
         </table>
+=======
+      <div id="detalhes-aluno"></div>
+      <script id="aluno-molde" type="text/x-handlebars-template">
+        <div style="float:left;height:100%;width:40%;">
+              <h2 id="detalhes-turma">Nome <b>{{nome}}</b></h2>
+              <h2 id="detalhes-turma">Frase <b>{{frase}}</b></h2>
+              <h2 id="detalhes-turma">Ênfase <b>{{enfase}}</b></h2>
+        </div>
+        <div id="foto-aluno" style="padding-top:20%;float:right;height:100%;width:60%;background: url({{foto}});background-repeat:no-repeat; background-position:top;"></div>
+>>>>>>> ad1318cdefce7121792ff2668b82b126175bdc6e
       </script>   
       <div id="carrossel-alunos"></div>
       <script id="carrossel-molde" type="text/x-handlebars-template">
@@ -114,7 +125,6 @@
   <script type="text/javascript" src="vendor/jquery.fullPage.js"></script>
   <script type="text/javascript" src="vendor/scrolloverflow.min.js"></script>
   <script type="text/javascript" src="vendor/owl.carousel.min.js"></script>
-  <script type="text/javascript" src="vendor/mqtt.min.js"></script>
   <script type="text/javascript" src="vendor/handlebars.min-latest.js"></script>
 
   <!-- MeFormei Camera -->
@@ -136,11 +146,16 @@
       .then(turmas => slider.init(turmas))
       .done(() => {
         cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
-        cameratracker.init({ip: "localhost", port: 9001});
+        cameratracker.init({ip: "localhost", port: 9000});
       })
       .fail(() => alert("Falha ao obter dados do servidor."));
+<<<<<<< HEAD
     
     $.getJSON("http://meformei.ddns.net/aluno/api/v1/turmas/1/alunos")
+=======
+	  
+	  $.getJSON("http://meformei.ddns.net/aluno/api/v1/turmas/1/alunos")
+>>>>>>> ad1318cdefce7121792ff2668b82b126175bdc6e
       .then(alunos => slideralunos.init(alunos))
       .done(() => {
         cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
@@ -164,7 +179,7 @@
       slider.init(mockTurmas);  
       slideralunos.init(mockAlunos);
       cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
-      cameratracker.init({ip: "localhost", port: 9001});
+      cameratracker.init({ip: "localhost", port: 9000});
     }
   </script>
 

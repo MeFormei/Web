@@ -1,41 +1,43 @@
 const TOPIC_DIRECTION = 'direction';
 const TOPIC_POSITION = 'position';
 var callbacks = { 'direction':{'WEST':null,'EAST':null,'NORTH':null,'SOUTH':null}, 'position':null };
-var client = {};
+var socket = {};
 var cameratracker = cameratracker || {};
 
 cameratracker.init = function(config){
-	cameratracker.doConnection(config.ip,config.port);
+	cameratracker.doConnection(config.ip, config.port);
 }
 
-cameratracker.doConnection = function(ip, port){
-	client = mqtt.connect('mqtt://' + ip + ':' + port);
+cameratracker.doConnection = function(ip, port) {
+	socket = new WebSocket('ws://' + ip + ':' + port + '/');
 
-	client.on('connect', function () {
+	socket.onopen = function(event) {
 		console.log('Realizada com sucesso!');
-	  client.subscribe(TOPIC_DIRECTION);
-		client.subscribe(TOPIC_POSITION);
-	});
+	}
 
-	client.on('message', function(topic, payload){
-		var topicStr = topic.toString();
-		var payloadStr = payload.toString();
+	socket.onmessage = function(event) {
+		var strMessage = event.data;
+		var message = JSON.parse(strMessage);
+		console.log(message);
 		
-		if(topicStr === TOPIC_DIRECTION){
+		var topic = message.topic;
+		var data = message.data;
+		
+		if(topic === TOPIC_DIRECTION){
 
-			callbacks[TOPIC_DIRECTION][payloadStr](); // calls callback function
+			callbacks[TOPIC_DIRECTION][data](); // calls callback function
 
-		} else if (topicStr === TOPIC_POSITION) {
+		} else if (topic === TOPIC_POSITION) {
 
-		    if(payloadStr === 'none'){
+		    if(data === 'none'){
 				callbacks[TOPIC_POSITION](null); // calls callback function with no position
 			} else {
-		        var position = JSON.parse(payloadStr);
+		        var position = JSON.parse(data);
 		        callbacks[TOPIC_POSITION](position); // calls callback function with the received position
             }
 
 		}
-	});
+	}
 }
 
 cameratracker.onLeft = function(callback){
