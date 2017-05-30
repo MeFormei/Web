@@ -107,7 +107,6 @@
   <script type="text/javascript" src="vendor/jquery.fullPage.js"></script>
   <script type="text/javascript" src="vendor/scrolloverflow.min.js"></script>
   <script type="text/javascript" src="vendor/owl.carousel.min.js"></script>
-  <script type="text/javascript" src="vendor/mqtt.min.js"></script>
   <script type="text/javascript" src="vendor/handlebars.min-latest.js"></script>
 
   <!-- MeFormei Camera -->
@@ -129,7 +128,7 @@
       .then(turmas => slider.init(turmas))
       .done(() => {
         cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
-        cameratracker.init({ip: "localhost", port: 9001});
+        cameratracker.init({ip: "localhost", port: 9000});
       })
       .fail(() => alert("Falha ao obter dados do servidor."));
 	  
@@ -157,7 +156,7 @@
       slider.init(mockTurmas);  
       slideralunos.init(mockAlunos);
       cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
-      cameratracker.init({ip: "localhost", port: 9001});
+      cameratracker.init({ip: "localhost", port: 9000});
     }
   </script>
 
