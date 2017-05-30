@@ -30,17 +30,9 @@ slider.changeTurma = function() {
   homenageadosDiv.html(homenageadosHtml);
   $.getJSON("http://meformei.ddns.net/aluno/api/v1/turmas/"+turma.id+"/alunos")
       .then(alunos => slideralunos.init(alunos))
-<<<<<<< HEAD
       .done()
       .fail(() => alert("Falha ao obter dados dos alunos do servidor."));
-=======
-      .done(() => {
-        cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
-        cameratracker.init({ip: "localhost", port: 9001});
-      })
-      .fail(() => alert("Falha ao obter dados dos alunos do servidor."));
 
->>>>>>> ad1318cdefce7121792ff2668b82b126175bdc6e
 }
 
 slider.changeCurrentMusic = function()

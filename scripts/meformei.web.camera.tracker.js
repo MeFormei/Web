@@ -39,12 +39,10 @@ cameratracker.onLeft(function () {
     execOpenedSlider(function() {
         owl.trigger('prev.owl.carousel');
         updateSoundHorizontal();
-<<<<<<< HEAD
+
         if(isGiraTurma) 
-=======
-        if(isGiraTurma)
->>>>>>> ad1318cdefce7121792ff2668b82b126175bdc6e
             slider.previousItem();
+
         slideralunos.previousItem();
     });
 });
@@ -53,17 +51,12 @@ cameratracker.onRight(function () {
     execOpenedSlider(function() {
         owl.trigger('next.owl.carousel');
         updateSoundHorizontal();
-<<<<<<< HEAD
+
         if(isGiraTurma) 
             slider.nextItem();
             
         slideralunos.previousItem();
-=======
-        if(isGiraTurma)
-            slider.nextItem();
-        slideralunos.nextItem();
-        
->>>>>>> ad1318cdefce7121792ff2668b82b126175bdc6e
+
     });
 });
 

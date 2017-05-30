@@ -1,6 +1,5 @@
  $(document).ready(function() {
       $('#fullpage').fullpage({
-<<<<<<< HEAD
         sectionsColor: ['#fff', '#F1F1F1', '#F7F7F7'],
         onLeave: function(index, nextIndex, direction){
           if (index == '1'){
@@ -15,17 +14,5 @@
               isGiraTurma = false;
           }
         },
-=======
-      	sectionsColor: ['#fff', '#F1F1F1', '#F7F7F7'],
-      	onLeave: function(index, nextIndex, direction){
-      		if (index == '1'){
-      			$('.slide-turmas').addClass('aberto');
-            isGiraTurma = false;
-      		} else {
-				    $('.slide-turmas').removeClass('aberto');
-            isGiraTurma = true;
-      		}
-      	},
->>>>>>> ad1318cdefce7121792ff2668b82b126175bdc6e
   });  
 });
