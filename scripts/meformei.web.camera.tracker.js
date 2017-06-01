@@ -40,10 +40,11 @@ cameratracker.onLeft(function () {
         owl.trigger('prev.owl.carousel');
         updateSoundHorizontal();
 
-        if(isGiraTurma) 
+        if(isGiraTurma) {
             slider.previousItem();
-
-        slideralunos.previousItem();
+        } else {
+            slideralunos.previousItem();
+        }
     });
 });
 
@@ -52,11 +53,11 @@ cameratracker.onRight(function () {
         owl.trigger('next.owl.carousel');
         updateSoundHorizontal();
 
-        if(isGiraTurma) 
+        if(isGiraTurma) {
             slider.nextItem();
-            
-        slideralunos.previousItem();
-
+        } else {
+            slideralunos.nextItem();
+        }
     });
 });
 
@@ -72,7 +73,6 @@ cameratracker.onDown(function () {
 
 cameratracker.onPosition(function (position) {
     if (position === null) {
-        console.log('position null')
         cameraview.toggleFeedbackPanel(false);
         cameraview.drawable = false;
     } else {

@@ -18,7 +18,6 @@ cameratracker.doConnection = function(ip, port) {
 	socket.onmessage = function(event) {
 		var strMessage = event.data;
 		var message = JSON.parse(strMessage);
-		console.log(message);
 		
 		var topic = message.topic;
 		var data = message.data;

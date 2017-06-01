@@ -143,8 +143,8 @@
 
       .then(alunos => slideralunos.init(alunos))
       .done(() => {
-        cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
-        cameratracker.init({ip: "localhost", port: 9001});
+        // cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
+        // cameratracker.init({ip: "localhost", port: 9000});
       })
       .fail(() => alert("Falha ao obter dados dos alunos do servidor."));
     } else {
