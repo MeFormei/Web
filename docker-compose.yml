@@ -5,6 +5,8 @@ services:
     container_name: "backend"
     environment:
       - DATABASE_URL=mysql://root:root@mysql:3306/meformei
+      - VIRTUAL_HOST=localhost
+      - VIRTUAL_PORT=3000
     ports:
       - "3000:3000"
     links:
@@ -21,3 +23,12 @@ services:
       - MYSQL_DATABASE=meformei
     ports:
       - "3306:3306"
+
+  nginx:
+    image: jwilder/nginx-proxy:latest
+    ports:
+      - "80:80"
+    volumes:
+      - "/var/run/docker.sock:/tmp/docker.sock:ro"
+    links:
+      - backend
