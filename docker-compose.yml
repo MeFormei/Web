@@ -1,0 +1,23 @@
+version: '2'
+services:
+  backend:
+    image: 7robertodantas/meformei-backend:latest
+    container_name: "backend"
+    environment:
+      - DATABASE_URL=mysql://root:root@mysql:3306/meformei
+    ports:
+      - "3000:3000"
+    links:
+      - mysql
+    depends_on:
+      - mysql
+    command: bash -c "docker/wait-for-it.sh mysql:3306 -t 0 && npm start"
+
+  mysql:
+    image: "mysql:8.0"
+    container_name: "mysql"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=meformei
+    ports:
+      - "3306:3306"
