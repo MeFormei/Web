@@ -1,8 +1,7 @@
 #!/bin/bash
 
-scp -oStrictHostKeyCheck=no -r . ubuntu@34.211.171.144:/srv/meformei
-
 echo 'Updating files on server'
+scp -oStrictHostKeyChecking=no -r . ubuntu@34.211.171.144:~
 ssh ubuntu@34.211.171.144 << EOF
 docker pull 7robertodantas/meformei-backend:latest
 docker-compose stop || true
