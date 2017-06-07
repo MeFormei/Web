@@ -22,10 +22,6 @@ slideralunos.changeCurrentImage = function() {
   var alunoHtml    = detalhesTemplate(aluno);
   detalhesDiv.html(alunoHtml);
 
-  /*var fotoAlunoUrl = aluno.foto;
-  $aluno = $('#aluno');
-  $aluno.css("background", "url('" + fotoAlunoUrl + "') center fixed");
-  $aluno.css("background-size", "cover");*/
 }
 
 slideralunos.nextItem = function() {
@@ -45,9 +41,15 @@ slideralunos.previousItem = function() {
 }
 
 slideralunos.carregaralunos = function(alunos){
+  alunoIndex = 0;
   slideralunos.alunos = alunos;
-  var alunosHtml = carrosselTemplate({'alunos': alunos});
-  carrosselDiv.html(alunosHtml);
+  var carrosselalunosHtml = carrosselTemplate({'alunos': alunos});
+  carrosselDiv.html(carrosselalunosHtml);
+
+  aluno = slideralunos.alunos[0];
+  alunoHtml    = detalhesTemplate(aluno);
+  detalhesDiv.html(alunoHtml);
+
   owl = $('.owl-carousel');
   owl.owlCarousel({
         loop:true,
@@ -67,6 +69,5 @@ slideralunos.carregaralunos = function(alunos){
         }
    });
 
-  slideralunos.changeCurrentImage();
 }
 
