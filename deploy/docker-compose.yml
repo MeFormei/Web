@@ -1,7 +1,7 @@
 version: '2'
 services:
   backend:
-    image: 7robertodantas/meformei-backend:current
+    image: 7robertodantas/backend:current
     container_name: backend
     environment:
       - DATABASE_URL=mysql://root:root@mysql:3306/meformei
