@@ -28,7 +28,7 @@ slider.changeTurma = function() {
   var turma = slider.turmas[turmaIndex];
   var homenageadosHtml    = homenageadosTemplate(turma);
   homenageadosDiv.html(homenageadosHtml);
-  $.getJSON("http://meformei.ddns.net/aluno/api/v1/turmas/"+turma.id+"/alunos")
+  $.getJSON("http://34.211.171.144/backend/api/v1/turmas/"+turma.id+"/alunos")
       .then(alunos => slideralunos.init(alunos))
       .done()
       .fail(() => alert("Falha ao obter dados dos alunos do servidor."));

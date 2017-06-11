@@ -131,7 +131,7 @@
 
     var online = true;
     if(online){
-      $.getJSON("http://meformei.ddns.net/turma/api/v1/turmas")
+      $.getJSON("http://34.211.171.144/backend/api/v1/turmas")
       .then(turmas => slider.init(turmas))
       .done(() => {
         cameraview.init({canvasId: 'cameraview', wrapperId:'cameraview-wrapper'});
@@ -139,7 +139,7 @@
       })
       .fail(() => alert("Falha ao obter dados do servidor."));
     
-    $.getJSON("http://meformei.ddns.net/aluno/api/v1/turmas/1/alunos")
+    $.getJSON("http://34.211.171.144/backend/api/v1/turmas/1/alunos")
 
       .then(alunos => slideralunos.init(alunos))
       .done(() => {
