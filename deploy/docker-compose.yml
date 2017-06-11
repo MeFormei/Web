@@ -11,6 +11,7 @@ services:
       - "3000:3000"
     volumes:
       - backend-static:/usr/src/app/public
+      - backend-uploads:/usr/src/app/uploads
     links:
       - mysql
     depends_on:
@@ -37,8 +38,10 @@ services:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ../.:/srv/meformei:ro
       - backend-static:/srv/meformei/backend:ro
+      - backend-uploads:/srv/meformei/uploads:ro
     links:
       - backend
 
 volumes:
   backend-static:
+  backend-uploads:
