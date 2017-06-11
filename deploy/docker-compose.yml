@@ -21,6 +21,8 @@ services:
   mysql:
     image: "mysql:8.0"
     container_name: mysql
+    volumes:
+      - mysql-data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=meformei
@@ -43,5 +45,6 @@ services:
       - backend
 
 volumes:
+  mysql-data:
   backend-static:
   backend-uploads:
