@@ -1,0 +1,1 @@
+ssh $host "echo 2>&1" && echo $host OK || echo $host NOK

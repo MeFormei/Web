@@ -2,6 +2,10 @@ machine:
   services:
     - docker
 
+test:
+  override:
+    - ./deploy/test.sh
+
 deployment:
   production:
     branch: master
