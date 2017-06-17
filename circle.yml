@@ -2,6 +2,10 @@ machine:
   services:
     - docker
 
+dependencies:
+  override:
+     - chmod +x test.sh
+
 test:
   override:
     - ./deploy/test.sh
