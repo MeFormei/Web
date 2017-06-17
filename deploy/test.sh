@@ -1,1 +1,7 @@
-ssh $user@$host "echo 2>&1" && echo $host OK || echo $host NOK && exit
+#!/bin/bash
+
+echo 'Testing ssh connection with server'
+ssh $user@$host << EOF
+echo $host OK || echo $host NOK
+exit
+EOF
